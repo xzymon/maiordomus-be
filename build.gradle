@@ -1,0 +1,76 @@
+plugins {
+	id 'org.springframework.boot' version "${spring_boot_version}"
+	id 'io.spring.dependency-management' version "${spring_dependency_plugin}"
+	id 'java'
+	id 'war'
+	id 'idea'
+}
+
+group = 'com.xzymon'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+//	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+//	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+//	implementation 'org.springframework.boot:spring-boot-starter-jersey'
+//	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+//	implementation 'org.springframework.session:spring-session-core'
+//	implementation 'org.springframework.session:spring-session-jdbc'
+//	implementation 'org.springframework.data:spring-data-envers'
+//	implementation 'org.yaml:snakeyaml:2.0'
+//	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+//	implementation 'org.apache.httpcomponents.client5:httpclient5:5.2'
+//	implementation "org.mapstruct:mapstruct:${mapstruct_version}"
+//	implementation 'org.liquibase:liquibase-core:4.23.1'
+//	implementation 'org.apache.commons:commons-pool2'
+//	compileOnly 'org.projectlombok:lombok'
+//	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+//	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
+//	runtimeOnly 'org.postgresql:postgresql'
+//	annotationProcessor 'org.projectlombok:lombok'
+//	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstruct_version}"
+//	annotationProcessor 'org.hibernate.orm:hibernate-jpamodelgen'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+//	testImplementation 'org.springframework.security:spring-security-test'
+//	testImplementation 'com.h2database:h2'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+/*
+compileJava {
+	options.compilerArgs += [
+			'-Amapstruct.suppressGeneratorTimestamp=true',
+			'-Amapstruct.suppressGeneratorVersionInfoComment=true',
+			'-Amapstruct.defaultComponentModel=spring',
+	]
+}
+
+springBoot {
+	buildInfo()
+}
+
+bootRun {
+	jvmArgs = ["-Djavax.net.ssl.trustStore=NULL",
+			   "-Djavax.net.ssl.trustStoreType=Windows-ROOT"]
+	args = ["--spring.profiles.active=dev"]
+	environment("VERSION": "1.1.1-test")
+}*/
