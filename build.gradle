@@ -25,7 +25,7 @@ repositories {
 
 dependencies {
 //	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-//	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 //	implementation 'org.springframework.boot:spring-boot-starter-jersey'
 //	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -35,15 +35,16 @@ dependencies {
 //	implementation 'org.yaml:snakeyaml:2.0'
 //	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
 //	implementation 'org.apache.httpcomponents.client5:httpclient5:5.2'
-//	implementation "org.mapstruct:mapstruct:${mapstruct_version}"
-//	implementation 'org.liquibase:liquibase-core:4.23.1'
+	implementation "org.mapstruct:mapstruct:${mapstruct_version}"
+	implementation 'org.liquibase:liquibase-core:4.23.1'
 //	implementation 'org.apache.commons:commons-pool2'
-//	compileOnly 'org.projectlombok:lombok'
-//	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 //	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
+	runtimeOnly 'com.h2database:h2'
 //	runtimeOnly 'org.postgresql:postgresql'
-//	annotationProcessor 'org.projectlombok:lombok'
-//	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstruct_version}"
+	annotationProcessor 'org.projectlombok:lombok'
+	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstruct_version}"
 //	annotationProcessor 'org.hibernate.orm:hibernate-jpamodelgen'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -55,7 +56,6 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
-/*
 compileJava {
 	options.compilerArgs += [
 			'-Amapstruct.suppressGeneratorTimestamp=true',
@@ -64,6 +64,7 @@ compileJava {
 	]
 }
 
+/*
 springBoot {
 	buildInfo()
 }
