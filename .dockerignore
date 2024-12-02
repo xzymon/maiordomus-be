@@ -7,5 +7,5 @@ out
 *.iml
 
 .dockerignore
-_yy.Dockerfile.txt
+ttt_Dockerfile.txt
 docker-compose.yml

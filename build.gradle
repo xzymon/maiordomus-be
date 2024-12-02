@@ -2,7 +2,6 @@ plugins {
 	id 'org.springframework.boot' version "${spring_boot_version}"
 	id 'io.spring.dependency-management' version "${spring_dependency_plugin}"
 	id 'java'
-	id 'war'
 	id 'idea'
 }
 
@@ -10,7 +9,9 @@ group = 'com.xzymon'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	sourceCompatibility = '17'
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
 }
 
 configurations {
@@ -36,17 +37,17 @@ dependencies {
 //	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
 //	implementation 'org.apache.httpcomponents.client5:httpclient5:5.2'
 	implementation "org.mapstruct:mapstruct:${mapstruct_version}"
-	implementation 'org.liquibase:liquibase-core:4.23.1'
+	implementation "org.liquibase:liquibase-core:${liquibase_version}"
 //	implementation 'org.apache.commons:commons-pool2'
 	compileOnly 'org.projectlombok:lombok'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+//	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 //	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
-	runtimeOnly 'com.h2database:h2'
-//	runtimeOnly 'org.postgresql:postgresql'
+//	runtimeOnly 'com.h2database:h2'
+	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok'
 	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstruct_version}"
 //	annotationProcessor 'org.hibernate.orm:hibernate-jpamodelgen'
-	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+//	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 //	testImplementation 'org.springframework.security:spring-security-test'
 //	testImplementation 'com.h2database:h2'

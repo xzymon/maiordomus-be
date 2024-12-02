@@ -1,0 +1,25 @@
+FROM amazoncorretto:8u402-alpine3.17 as build-env
+LABEL authors="coder"
+
+ENTRYPOINT ["top", "-b"]
+
+WORKDIR /app
+
+ARG build_tag
+
+COPY gradlew .
+COPY gradle gradle
+COPY settings.gradle .
+COPY gradle.properties .
+COPY build.gradle .
+
+RUN ls -l
+
+RUN ./gradlew --version
+# Download dependencies layer
+RUN ./gradlew build 2>/dev/null || true
+
+COPY . .
+
+RUN ./gradlew build
+# i jeszcze kolejne... ?
