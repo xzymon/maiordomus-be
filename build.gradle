@@ -26,15 +26,16 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	compileOnly 'org.projectlombok:lombok'
 	implementation "org.mapstruct:mapstruct:${mapstruct_version}"
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
 	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstruct_version}"
-	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.postgresql:postgresql:42.6.0'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation "com.opencsv:opencsv:${opencsv_version}"
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
