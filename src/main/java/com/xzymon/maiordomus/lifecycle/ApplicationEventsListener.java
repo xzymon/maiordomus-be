@@ -20,8 +20,8 @@ public class ApplicationEventsListener {
     @EventListener
     public void handleContextRefreshed(ContextRefreshedEvent event) {
         System.out.println("ContextRefreshedEvent: Kontekst aplikacji został odświeżony.");
-        //injectEntitiesToDatabase();
-        //System.out.println("Teraz repo powinno być zainicjalizowane");
+        injectEntitiesToDatabase();
+        System.out.println("Teraz repo powinno być zainicjalizowane");
     }
 
     // at start 2)

@@ -1,6 +1,6 @@
 package com.xzymon.maiordomus.service;
 
-import com.xzymon.maiordomus.model.DummyMessage;
+import com.xzymon.maiordomus.model.db.DummyMessage;
 import com.xzymon.maiordomus.repository.DummyMessageRepository;
 import org.springframework.stereotype.Service;
 
@@ -23,11 +23,16 @@ public class DummyServiceImpl implements DummyService {
 
 	public void initRepo() {
 		List<DummyMessage> dummyMessages = new ArrayList<>();
-		dummyMessages.add(new DummyMessage(1L, "Pierwsza wiadomosc"));
-		dummyMessages.add(new DummyMessage(2L, "Druga wiadomosc"));
-		dummyMessages.add(new DummyMessage(3L, "Trzecia wiadomosc"));
+		dummyMessages.add(new DummyMessage("Pierwsza wiadomosc"));
+		dummyMessages.add(new DummyMessage("Druga wiadomosc"));
+		dummyMessages.add(new DummyMessage("Trzecia wiadomosc"));
 
 		dummyMessageRepository.saveAll(dummyMessages);
 
+	}
+
+	@Override
+	public void add(DummyMessage message) {
+		dummyMessageRepository.save(message);
 	}
 }
