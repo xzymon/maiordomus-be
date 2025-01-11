@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 public class StockCandleDTO {
 	private String day;
 	private String periodEnd;
+	private Integer periodEndInDayNo;
 	private BigDecimal open;
 	private BigDecimal high;
 	private BigDecimal low;
