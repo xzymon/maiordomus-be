@@ -1,8 +1,8 @@
 plugins {
-	id 'org.springframework.boot' version "${spring_boot_version}"
-	id 'io.spring.dependency-management' version "${spring_dependency_plugin}"
 	id 'java'
-	id 'idea'
+	id 'war'
+	id 'org.springframework.boot' version '3.4.0'
+	id 'io.spring.dependency-management' version '1.1.6'
 }
 
 group = 'com.xzymon'
@@ -10,7 +10,7 @@ version = '0.0.1-SNAPSHOT'
 
 java {
 	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
+		languageVersion = JavaLanguageVersion.of(21)
 	}
 }
 
@@ -25,36 +25,19 @@ repositories {
 }
 
 dependencies {
-//	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-//	implementation 'org.springframework.boot:spring-boot-starter-jersey'
-//	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-//	implementation 'org.springframework.session:spring-session-core'
-//	implementation 'org.springframework.session:spring-session-jdbc'
-//	implementation 'org.springframework.data:spring-data-envers'
-//	implementation 'org.yaml:snakeyaml:2.0'
-//	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
-//	implementation 'org.apache.httpcomponents.client5:httpclient5:5.2'
-	implementation "org.mapstruct:mapstruct:${mapstruct_version}"
-	implementation "org.liquibase:liquibase-core:${liquibase_version}"
-//	implementation 'org.apache.commons:commons-pool2'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	compileOnly 'org.projectlombok:lombok'
-//	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-//	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
-//	runtimeOnly 'com.h2database:h2'
-	runtimeOnly 'org.postgresql:postgresql'
+	implementation "org.mapstruct:mapstruct:${mapstruct_version}"
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
 	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstruct_version}"
-//	annotationProcessor 'org.hibernate.orm:hibernate-jpamodelgen'
-//	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	implementation 'org.postgresql:postgresql:42.6.0'
+	implementation "com.opencsv:opencsv:${opencsv_version}"
+	implementation "org.liquibase:liquibase-core:${liquibase_version}"
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-//	testImplementation 'org.springframework.security:spring-security-test'
-//	testImplementation 'com.h2database:h2'
-}
-
-tasks.named('test') {
-	useJUnitPlatform()
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 compileJava {
@@ -65,14 +48,6 @@ compileJava {
 	]
 }
 
-/*
-springBoot {
-	buildInfo()
+tasks.named('test') {
+	useJUnitPlatform()
 }
-
-bootRun {
-	jvmArgs = ["-Djavax.net.ssl.trustStore=NULL",
-			   "-Djavax.net.ssl.trustStoreType=Windows-ROOT"]
-	args = ["--spring.profiles.active=dev"]
-	environment("VERSION": "1.1.1-test")
-}*/

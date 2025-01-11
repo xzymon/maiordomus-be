@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+				   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.23.xsd">
+
+	<changeSet id="stock-0" author="xzymon">
+		<createSequence incrementBy="50" sequenceName="stock_valor_seq" startValue="1"/>
+	</changeSet>
+
+	<changeSet id="stock-1" author="xzymon">
+		<createTable tableName="stock_valor">
+			<column name="id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" primaryKeyName="pk_stock_valor" validateNullable="true"/>
+			</column>
+			<column name="name" type="varchar(255)"/>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="stock-2" author="xzymon">
+		<createSequence incrementBy="50" sequenceName="stock_candle_seq" startValue="1"/>
+	</changeSet>
+
+	<changeSet id="stock-3" author="xzymon">
+		<createTable tableName="stock_candle">
+			<column name="id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" primaryKeyName="pk_stock_candle" validateNullable="true"/>
+			</column>
+			<column name="valor_id" type="BIGINT">
+				<constraints foreignKeyName="FK_STOCK_CANDLE_ON_VALOR" references="stock_valor(id)"/>
+			</column>
+			<column name="type" type="varchar(255)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="day" type="date"/>
+			<column name="period_end" type="time"/>
+			<column name="open" type="java.math.BigDecimal"/>
+			<column name="high" type="java.math.BigDecimal"/>
+			<column name="low" type="java.math.BigDecimal"/>
+			<column name="close" type="java.math.BigDecimal"/>
+		</createTable>
+	</changeSet>
+</databaseChangeLog>
