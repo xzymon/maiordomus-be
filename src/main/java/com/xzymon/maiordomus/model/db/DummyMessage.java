@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class DummyMessage {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(generator = "dummy_message_seq", strategy = GenerationType.SEQUENCE)
 	private Long id;
 	private String message;
 
