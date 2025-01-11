@@ -19,6 +19,7 @@ public interface DefaultMapper {
 
 	@Mapping(target = "day", expression = "java(com.xzymon.maiordomus.utils.MapperHelper.dateToDayString(stockCandle.getDay()))")
 	@Mapping(target = "periodEnd", expression = "java(com.xzymon.maiordomus.utils.MapperHelper.timeToTimeString(stockCandle.getPeriodEnd()))")
+	@Mapping(target = "periodEndInDayNo", expression = "java(com.xzymon.maiordomus.mapper.QuarterDayTimeMapper.PERIOD_END_TO_NUMBER.get(stockCandle.getPeriodEnd().toString()))")
 	@Mapping(target = "open", source = "open")
 	@Mapping(target = "close", source = "close")
 	@Mapping(target = "high", source = "high")
