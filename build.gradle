@@ -28,6 +28,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${openapi_doc_version}"
 	compileOnly 'org.projectlombok:lombok'
 	implementation "org.mapstruct:mapstruct:${mapstruct_version}"
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
