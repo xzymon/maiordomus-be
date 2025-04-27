@@ -25,19 +25,31 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-jersey'
+	//implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${openapi_doc_version}"
-	compileOnly 'org.projectlombok:lombok'
+	implementation "com.opencsv:opencsv:${opencsv_version}"
+	//implementation 'org.springframework.session:spring-session-core'
+	//implementation 'org.springframework.session:spring-session-jdbc'
+	implementation 'org.springframework.data:spring-data-envers'
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+	//implementation 'org.apache.httpcomponents.client5:httpclient5:5.2'
 	implementation "org.mapstruct:mapstruct:${mapstruct_version}"
+	implementation "org.liquibase:liquibase-core:${liquibase_version}"
+	implementation 'org.apache.commons:commons-pool2'
+	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	implementation 'org.postgresql:postgresql:42.6.0'
 	annotationProcessor 'org.projectlombok:lombok'
 	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstruct_version}"
-	implementation 'org.postgresql:postgresql:42.6.0'
-	implementation "com.opencsv:opencsv:${opencsv_version}"
-	implementation "org.liquibase:liquibase-core:${liquibase_version}"
+	annotationProcessor 'org.hibernate.orm:hibernate-jpamodelgen'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	//testImplementation 'org.springframework.security:spring-security-test'
+	//testImplementation 'com.h2database:h2'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 

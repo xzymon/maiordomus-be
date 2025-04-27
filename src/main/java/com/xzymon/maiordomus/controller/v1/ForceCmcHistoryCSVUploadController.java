@@ -1,8 +1,7 @@
 package com.xzymon.maiordomus.controller.v1;
 
-import com.xzymon.maiordomus.model.csv.CmcHistoryCsvRecord;
 import com.xzymon.maiordomus.service.FileFinderService;
-import com.xzymon.maiordomus.service.cmc.CmcHistoryCSVUploadService;
+import com.xzymon.maiordomus.service.cmc.CmcHistoryCsvUploadService;
 import com.xzymon.maiordomus.service.cmc.CmcHistoryDataValidationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Iterator;
-import java.util.List;
 
 @Controller
 @RequestMapping(ForceCmcHistoryCSVUploadController.BASE_URL)
@@ -24,10 +21,10 @@ public class ForceCmcHistoryCSVUploadController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ForceCmcHistoryCSVUploadController.class);
 
 	private final FileFinderService fileFinderService;
-	private final CmcHistoryCSVUploadService uploadService;
+	private final CmcHistoryCsvUploadService uploadService;
 	private final CmcHistoryDataValidationService validationService;
 
-	public ForceCmcHistoryCSVUploadController(FileFinderService fileFinderService, CmcHistoryCSVUploadService uploadService, CmcHistoryDataValidationService validationService) {
+	public ForceCmcHistoryCSVUploadController(FileFinderService fileFinderService, CmcHistoryCsvUploadService uploadService, CmcHistoryDataValidationService validationService) {
 		this.fileFinderService = fileFinderService;
 		this.uploadService = uploadService;
 		this.validationService = validationService;
@@ -40,6 +37,7 @@ public class ForceCmcHistoryCSVUploadController {
 		try {
 			File file = fileFinderService.getFileByName(filename);
 
+			/*
 			List<CmcHistoryCsvRecord> newestToOldest = uploadService.convertCSV(file);
 			List<CmcHistoryCsvRecord> cmcHistoryCsvRecords = newestToOldest.reversed();
 
@@ -48,7 +46,7 @@ public class ForceCmcHistoryCSVUploadController {
 			while (recordIt.hasNext()) {
 				validationService.validate(recordIt.next(), primordialNo, reversedNo);
 				primordialNo++; reversedNo--;
-			}
+			}*/
 
 		} catch (FileNotFoundException e) {
 			throw new RuntimeException(e);
