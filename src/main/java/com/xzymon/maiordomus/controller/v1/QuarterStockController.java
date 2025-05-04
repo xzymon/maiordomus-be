@@ -1,8 +1,11 @@
 package com.xzymon.maiordomus.controller.v1;
 
-import com.xzymon.maiordomus.dto.StockCandleDTO;
+import com.xzymon.maiordomus.dto.StockCandleDto;
+import com.xzymon.maiordomus.dto.request.DayInQuarterCandlesRequest;
+import com.xzymon.maiordomus.dto.response.DayInQuarterCandlesResponse;
 import com.xzymon.maiordomus.mapper.DefaultMapper;
 import com.xzymon.maiordomus.model.db.StockCandle;
+import com.xzymon.maiordomus.model.db.StooqQuarterStockCandle;
 import com.xzymon.maiordomus.service.stock.QuarterStockService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -33,20 +36,20 @@ public class QuarterStockController {
 	@CrossOrigin(origins = "*")
 	@GetMapping("/all")
 	@Operation(summary = "Pobierz wszystkie informacje o akcjach", description = "Zapytanie zwraca wszystkie akcje ze szczegółami w formie DTO.")
-	public ResponseEntity<List<StockCandleDTO>> getAll() {
+	public ResponseEntity<List<StockCandleDto>> getAll() {
 		LOGGER.info("Performing getAll");
-		List<StockCandle> fromDB = quarterStockService.getAll();
-		List<StockCandleDTO> dtos = fromDB.stream().map(DefaultMapper.INSTANCE::toStockCandleDto).toList();
+		var fromDB = quarterStockService.getAll();
+		List<StockCandleDto> dtos = fromDB.stream().map(DefaultMapper.INSTANCE::toStockCandleDto).toList();
 		return new ResponseEntity<>(dtos, HttpStatus.OK);
 	}
 
-	/*
 	@CrossOrigin(origins = "*")
-	@GetMapping("/all")
-	public ResponseEntity<List<StockCandleDTO>> getAll() {
-		LOGGER.info("Performing getAll");
-		List<StockCandle> fromDB = quarterStockService.getAll();
-		List<StockCandleDTO> dtos = fromDB.stream().map(DefaultMapper.INSTANCE::toStockCandleDto).toList();
-		return new ResponseEntity<>(dtos, HttpStatus.OK);
-	}*/
+	@GetMapping("/day4symbol")
+	public ResponseEntity<DayInQuarterCandlesResponse> getDayForValor(DayInQuarterCandlesRequest request) {
+		LOGGER.info("Performing getDayForValor with {}", request);
+		//List<StockCandle> fromDB = quarterStockService.getDayForValor(vn, day);
+		//List<StockCandleDTO> dtos = fromDB.stream().map(DefaultMapper.INSTANCE::toStockCandleDto).toList();
+		DayInQuarterCandlesResponse response = new DayInQuarterCandlesResponse();
+		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
 }

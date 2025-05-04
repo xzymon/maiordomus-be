@@ -1,5 +1,5 @@
-"DATA/CZAS";
-"TYP";
+"DATA/CZAS";	do konwersji na typ datowy
+"TYP";			enum - wyznaczyć wartości
 "ZLECENIE#";
 "TRANSAKCJA#";
 "ZLECENIE POWIĄZANE#";
@@ -38,3 +38,5 @@
 "CENA ROZLICZENIA";
 "ZYSK";
 "STRATA"
+
+

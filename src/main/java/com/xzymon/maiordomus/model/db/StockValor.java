@@ -16,4 +16,7 @@ public class StockValor {
 	@GeneratedValue(generator = "stock_valor_seq", strategy = GenerationType.SEQUENCE)
 	private Long id;
 	private String name;
+
+	@Column(name = "cmc_name")
+	private String cmcName;
 }

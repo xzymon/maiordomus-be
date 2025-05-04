@@ -1,0 +1,28 @@
+### Świece
+Świeca położona na linii 4:00 to świeca która zamyka się o 04:00:00.
+Tzn. że wartość z 04:00:01 tworzy już kolejną świecę.
+Tak to działa ZARÓWNO w wypadku wykresów Stooq jak i CMC.
+W związku z tym linia zamknięcia poprzedniego dnia to jest linia z 00:00:00 bieżącego dnia, a pierwsza świeca na wykresie 15min obejmuje czas 00:00:01-00:15:00.
+
+
+Świece mogą mieć wiele typów. Na każdy typ jest odrębna tabela, choć struktura tabel jest identyczna.
+dzienne (jednodniowe, całodniowe)
+15minutowe
+10minutowe
+1minutowe
+30sekundowe
+
+najbardziej mi zależy na obecności świec dziennych i 15minutowych - wszystko co ponad to to szczegóły przydatne - ale na bardzo niskim interwale.
+pierwotnie chciałem się posługiwać czasem w obrębie dni - ale jako, że nie wszystkie rodzaje świec mają przypisany sensowny czas (bo dzienne nie mają)
+- to postanowiłem wprowadzić szczegółowość: dzień + numer świedy w obrębie dnia.
+Czyli każda świeca ma opisany:
+ dzień + numer (w obrębie dnia)
+numery świec w obrębie dnia są właściwe dla źródła danych i rozdzielczości danych - i są jednoznaczne
+
+
+Ładowanie danych do systemu
+
+Przy wczytywaniu danych do systemu (z pliku) - korzystamy wyłącznie z jednej klasy: StockCandleCsvRecord
+[data],[czas],[open],[high],[low],[close]
+
+Mamy tu czas a nie numer świecy - więc z typu pliku należy wydedukować na jaką świecę mapuje się ten czas - i taką świecę stworzyć w bazie.

@@ -1,13 +1,13 @@
 package com.xzymon.maiordomus.service;
 
 import com.xzymon.maiordomus.model.csv.CmcHistoryCsvRecord;
-import com.xzymon.maiordomus.service.cmc.CmcHistoryCSVUploadService;
-import com.xzymon.maiordomus.service.cmc.CmcHistoryCSVUploadServiceImpl;
+import com.xzymon.maiordomus.service.cmc.CmcHistoryCsvUploadService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.ResourceUtils;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.function.Function;
@@ -16,15 +16,16 @@ import java.util.stream.Collectors;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-class CmcHistoryCSVUploadServiceImplTest {
+class CmcHistoryCsvUploadServiceTest {
 
-	CmcHistoryCSVUploadService service = new CmcHistoryCSVUploadServiceImpl();
+	CmcHistoryCsvUploadService service = new CmcHistoryCsvUploadService();
 
 	@Test
-	void convertCSV() throws FileNotFoundException {
+	void extract() throws FileNotFoundException {
 		File file = ResourceUtils.getFile("classpath:csvdata/cmc-history.csv");
+		FileInputStream fis = new FileInputStream(file);
 
-		List<CmcHistoryCsvRecord> records = service.convertCSV(file);
+		List<CmcHistoryCsvRecord> records = service.extract(fis);
 
 		System.out.println(records.size());
 

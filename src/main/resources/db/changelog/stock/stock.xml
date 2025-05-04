@@ -22,22 +22,42 @@
 	</changeSet>
 
 	<changeSet id="stock-3" author="xzymon">
-		<createTable tableName="stock_candle">
+		<createTable tableName="stock_candle_stq15m">
 			<column name="id" type="BIGINT">
-				<constraints nullable="false" primaryKey="true" primaryKeyName="pk_stock_candle" validateNullable="true"/>
+				<constraints nullable="false" primaryKey="true" primaryKeyName="pk_stock_candle_stq15m" validateNullable="true"/>
 			</column>
 			<column name="valor_id" type="BIGINT">
 				<constraints foreignKeyName="FK_STOCK_CANDLE_ON_VALOR" references="stock_valor(id)"/>
 			</column>
-			<column name="type" type="varchar(255)">
-				<constraints nullable="false"/>
-			</column>
 			<column name="day" type="date"/>
-			<column name="period_end" type="time"/>
+			<column name="candle_no" type="int"/>
 			<column name="open" type="java.math.BigDecimal"/>
 			<column name="high" type="java.math.BigDecimal"/>
 			<column name="low" type="java.math.BigDecimal"/>
 			<column name="close" type="java.math.BigDecimal"/>
 		</createTable>
+	</changeSet>
+
+	<changeSet id="stock-4" author="xzymon">
+		<createTable tableName="stock_candle_stq1d">
+			<column name="id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" primaryKeyName="pk_stock_candle_stq1d" validateNullable="true"/>
+			</column>
+			<column name="valor_id" type="BIGINT">
+				<constraints foreignKeyName="FK_STOCK_CANDLE_ON_VALOR" references="stock_valor(id)"/>
+			</column>
+			<column name="day" type="date"/>
+			<column name="candle_no" type="int"/>
+			<column name="open" type="java.math.BigDecimal"/>
+			<column name="high" type="java.math.BigDecimal"/>
+			<column name="low" type="java.math.BigDecimal"/>
+			<column name="close" type="java.math.BigDecimal"/>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="stock-5" author="xzymon">
+		<addColumn tableName="stock_valor">
+			<column name="cmc_name" type="varchar(255)"/>
+		</addColumn>
 	</changeSet>
 </databaseChangeLog>

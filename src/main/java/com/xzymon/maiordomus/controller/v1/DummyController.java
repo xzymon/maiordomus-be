@@ -1,6 +1,6 @@
 package com.xzymon.maiordomus.controller.v1;
 
-import com.xzymon.maiordomus.dto.DummyMessageDTO;
+import com.xzymon.maiordomus.dto.DummyMessageDto;
 import com.xzymon.maiordomus.mapper.DefaultMapper;
 import com.xzymon.maiordomus.model.db.DummyMessage;
 import com.xzymon.maiordomus.service.DummyService;
@@ -27,16 +27,16 @@ public class DummyController {
 
 	@CrossOrigin(origins = "*")
 	@GetMapping("/all")
-	public ResponseEntity<List<DummyMessageDTO>> performDummyGet() {
+	public ResponseEntity<List<DummyMessageDto>> performDummyGet() {
 		LOGGER.info("Performing dummy get");
 		List<DummyMessage> fromDB = dummyService.getAll();
-		List<DummyMessageDTO> dtos = fromDB.stream().map(DefaultMapper.INSTANCE::toDummyMessageDto).toList();
+		List<DummyMessageDto> dtos = fromDB.stream().map(DefaultMapper.INSTANCE::toDummyMessageDto).toList();
 		return new ResponseEntity<>(dtos, HttpStatus.OK);
 	}
 
 	@CrossOrigin(origins = "*")
 	@PostMapping("/post")
-	public ResponseEntity performDummyPost(@RequestBody DummyMessageDTO dummyMessageDTO) {
+	public ResponseEntity performDummyPost(@RequestBody DummyMessageDto dummyMessageDTO) {
 		LOGGER.info("Performing dummy post");
 		dummyService.add(DefaultMapper.INSTANCE.toDummyMessage(dummyMessageDTO));
 		return new ResponseEntity(HttpStatus.CREATED);

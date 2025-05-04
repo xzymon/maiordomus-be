@@ -13,19 +13,19 @@ class MapperHelperTest {
 
 	@Test
 	void dateToDayString() {
-		LocalDate localDate = LocalDate.of(2020, Month.JANUARY, 1);
+		LocalDate localDate = LocalDate.of(2020, Month.JANUARY, 2);
 		Date date = Date.valueOf(localDate);
 		String dayString = MapperHelper.dateToDayString(date);
-		assertEquals("2020-01-01", dayString);
+		assertEquals("2020-01-02", dayString);
 	}
 
 	@Test
 	void dayStringToDate() {
-		Date result = MapperHelper.dayStringToDate("2020-01-01");
+		Date result = MapperHelper.dayStringToDate("2020-01-02");
 		LocalDate localDate = result.toLocalDate();
 		assertEquals(2020, localDate.getYear());
 		assertEquals(1, localDate.getMonthValue());
-		assertEquals(1, localDate.getDayOfMonth());
+		assertEquals(2, localDate.getDayOfMonth());
 	}
 
 	@Test

@@ -1,18 +1,31 @@
 package com.xzymon.maiordomus.utils;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class MapperHelper {
+	public static final int DAY_IN_HOURS = 24;
+	public static final int HOUR_IN_MINUTES = 60;
+	public static final int MINUTE_IN_SECONDS = 60;
+
+	public static final int DAY_IN_SECONDS = DAY_IN_HOURS * HOUR_IN_MINUTES * MINUTE_IN_SECONDS;
+
+	public static final String TIME_FORMAT = "%02d:%02d:%02d";
+	public static final String DATE_FORMAT = "%04d-%02d-%02d";
+
+	public static String getDateString(int year, int month, int day) {
+		return String.format(DATE_FORMAT, year, month, day);
+	}
 
 	public static String dateToDayString(Date date) {
 		LocalDate localDate = date.toLocalDate();
 		int day = localDate.getDayOfMonth();
 		int month = localDate.getMonthValue();
 		int year = localDate.getYear();
-		return String.format("%04d-%02d-%02d", year, day, month);
+		return getDateString(year, month, day);
 	}
 
 	public static Date dayStringToDate(String dayString) {
@@ -23,12 +36,16 @@ public class MapperHelper {
 		return Date.valueOf(LocalDate.of(year, month, day));
 	}
 
+	public static String getTimeString(int hour, int minute, int second) {
+		return String.format(TIME_FORMAT, hour, minute, second);
+	}
+
 	public static String timeToTimeString(Time time) {
 		LocalTime localTime = time.toLocalTime();
 		int hour = localTime.getHour();
 		int minute = localTime.getMinute();
 		int second = localTime.getSecond();
-		return String.format("%02d:%02d:%02d", hour, minute, second);
+		return getTimeString(hour, minute, second);
 	}
 
 	public static Time timeStringToTime(String timeString) {
@@ -37,5 +54,12 @@ public class MapperHelper {
 		int minute = Integer.parseInt(parts[1]);
 		int second = Integer.parseInt(parts[2]);
 		return Time.valueOf(LocalTime.of(hour, minute, second));
+	}
+
+	public static BigDecimal stringToBigDecimal(String string) {
+		if (string == null) {
+			return null;
+		}
+		return new BigDecimal(string);
 	}
 }

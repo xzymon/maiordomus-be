@@ -17,7 +17,7 @@ public class CmcHistoryCsvRecord {
 
 	//"03""ZLECENIE#";
 	@CsvBindByPosition(position = 2)
-	private String order;
+	private String orderNo;
 
 	//"04""TRANSAKCJA#";
 	@CsvBindByPosition(position = 3)

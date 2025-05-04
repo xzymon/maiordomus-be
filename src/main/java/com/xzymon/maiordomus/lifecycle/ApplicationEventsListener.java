@@ -1,6 +1,7 @@
 package com.xzymon.maiordomus.lifecycle;
 
 import com.xzymon.maiordomus.service.DummyService;
+import com.xzymon.maiordomus.service.stock.DailyStockService;
 import com.xzymon.maiordomus.service.stock.QuarterStockService;
 import org.springframework.boot.context.event.*;
 import org.springframework.context.event.*;
@@ -11,12 +12,14 @@ import org.springframework.web.context.support.ServletRequestHandledEvent;
 @Component
 public class ApplicationEventsListener {
 
-	private DummyService dummyService;
-	private QuarterStockService quarterStockService;
+	private final DummyService dummyService;
+	private final DailyStockService dailyStockService;
+	private final QuarterStockService quarterStockService;
 
-	public ApplicationEventsListener(DummyService dummyService, QuarterStockService quarterStockService) {
+	public ApplicationEventsListener(DummyService dummyService, QuarterStockService quarterStockService, DailyStockService dailyStockService) {
 		this.dummyService = dummyService;
 		this.quarterStockService = quarterStockService;
+		this.dailyStockService = dailyStockService;
 	}
 
 	// at start 1)
@@ -93,5 +96,6 @@ public class ApplicationEventsListener {
 	private void injectEntitiesToDatabase() {
 		dummyService.initRepo();
 		quarterStockService.initRepo();
+		dailyStockService.initRepo();
 	}
 }
