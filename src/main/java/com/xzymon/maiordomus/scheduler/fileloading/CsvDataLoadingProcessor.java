@@ -6,7 +6,6 @@ import com.xzymon.maiordomus.scheduler.fileloading.exception.EmptyFileNameAttrib
 import com.xzymon.maiordomus.service.FileUploadAuditService;
 import com.xzymon.maiordomus.service.cmc.CmcHistoryCsvUploadService;
 import com.xzymon.maiordomus.service.cmc.CsvUploadService;
-import com.xzymon.maiordomus.service.stock.AbstractStockCsvUploadService;
 import com.xzymon.maiordomus.service.stock.DailyStockCsvUploadService;
 import com.xzymon.maiordomus.service.stock.QuarterStockCsvUploadService;
 import lombok.extern.slf4j.Slf4j;
@@ -97,8 +96,16 @@ public class CsvDataLoadingProcessor {
 				log.debug("STOOQ_BLOCK_1D file type detected");
 				return dailyStockCsvUploadService;
 			}
-			case STOOQ_BLOCK_15M -> {
-				log.debug("STOOQ_BLOCK_15M file type detected");
+			case STOOQ_BLOCK_CRYPTO_1D -> {
+				log.debug("STOOQ_BLOCK_CRYPTO_1D file type detected");
+				return dailyStockCsvUploadService;
+			}
+			case STOOQ_BLOCK_CRYPTO_15M -> {
+				log.debug("STOOQ_BLOCK_CRYPTO_15M file type detected");
+				return quarterStockCsvUploadService;
+			}
+			case STOOQ_BLOCK_CURR_15M -> {
+				log.debug("STOOQ_BLOCK_CURR_15M file type detected");
 				return quarterStockCsvUploadService;
 			}
 			default -> {

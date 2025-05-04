@@ -14,6 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -64,7 +65,8 @@ public class CsvFileScheduler {
 		try {
 			pathsToFiles = Files.list(path)
 					               .filter(p -> !Files.isDirectory(p))
-					               .collect(Collectors.toUnmodifiableList());
+					               .collect(Collectors.toList());
+			pathsToFiles.sort(Comparator.comparing(p -> p.getFileName().toString()));
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}

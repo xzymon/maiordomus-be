@@ -5,7 +5,6 @@ import com.xzymon.maiordomus.dto.StockCandleDto;
 import com.xzymon.maiordomus.mapper.CsvMapper;
 import com.xzymon.maiordomus.mapper.DefaultMapper;
 import com.xzymon.maiordomus.mapper.daytime.QuarterDayTimeMapper;
-import com.xzymon.maiordomus.model.csv.DateStockCandleCsvRecord;
 import com.xzymon.maiordomus.model.csv.DateTimeStockCandleCsvRecord;
 import com.xzymon.maiordomus.model.db.StockValor;
 import com.xzymon.maiordomus.model.db.StooqQuarterStockCandle;
@@ -23,11 +22,13 @@ import java.util.List;
 @Slf4j
 public class QuarterStockCsvUploadService extends AbstractStockCsvUploadService {
 
+	private QuarterDayTimeMapper quarterDayTimeMapper;
 	private QuarterStockCandleRepository quarterStockCandleRepository;
 
 	public QuarterStockCsvUploadService(StockValorService stockValorService, QuarterStockCandleRepository quarterStockCandleRepository) {
 		super(stockValorService);
 		this.quarterStockCandleRepository = quarterStockCandleRepository;
+		this.quarterDayTimeMapper = new QuarterDayTimeMapper();
 	}
 
 	@Override
@@ -66,7 +67,7 @@ public class QuarterStockCsvUploadService extends AbstractStockCsvUploadService 
 			sb.append("[").append(rowIndex).append("]");
 			sb.append("{Invalid date=").append(record.getDate()).append("}");
 		}
-		if (QuarterDayTimeMapper.PERIOD_END_TIME_TO_NUMBER.get(record.getTime()) == null) {
+		if (quarterDayTimeMapper.PERIOD_END_TIME_TO_NUMBER.get(record.getTime()) == null) {
 			sb.append("[").append(rowIndex).append("]");
 			sb.append("{Invalid time=").append(record.getTime()).append("}");
 		}

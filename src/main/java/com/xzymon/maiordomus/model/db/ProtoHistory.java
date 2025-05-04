@@ -1,170 +1,178 @@
-package com.xzymon.maiordomus.model.csv;
+package com.xzymon.maiordomus.model.db;
 
-import com.opencsv.bean.CsvBindByPosition;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Entity
+@Table(name = "proto_history")
 @Data
 @NoArgsConstructor
-public class CmcHistoryCsvRecord {
+@AllArgsConstructor
+public class ProtoHistory {
+
+	@Id
+	@GeneratedValue(generator = "cmc_history_seq", strategy = GenerationType.SEQUENCE)
+	private Long id;
+
 	//"01""DATA/CZAS";
-	@CsvBindByPosition(position = 0)
+	@Column(name = "order_timestamp")
 	private String orderTimestamp;
 
 	//"02""TYP";
-	@CsvBindByPosition(position = 1)
+	@Column(name = "order_type")
 	private String orderType;
 
 	//"03""ZLECENIE#";
-	@CsvBindByPosition(position = 2)
+	@Column(name = "order_no")
 	private String orderNo;
 
 	//"04""TRANSAKCJA#";
-	@CsvBindByPosition(position = 3)
+	@Column(name = "transaction")
 	private String transaction;
 
 	//"05""ZLECENIE POWIĄZANE#";
-	@CsvBindByPosition(position = 4)
+	@Column(name = "related_order")
 	private String relatedOrder;
 
 	//"06""INSTRUMENT";
-	@CsvBindByPosition(position = 5)
+	@Column(name = "instrument")
 	private String instrument;
 
 	//"07""JEDNOSTKI/IL.";
-	@CsvBindByPosition(position = 6)
+	@Column(name = "volume")
 	private String volume;
 
 	//"08""CENA";
-	@CsvBindByPosition(position = 7)
+	@Column(name = "price")
 	private String price;
 
 	//"09""TOLERANCJA CENA";
-	@CsvBindByPosition(position = 8)
+	@Column(name = "price_tolerance")
 	private String priceTolerance;
 
 	//"10""STOP LOSS";
-	@CsvBindByPosition(position = 9)
+	@Column(name = "stop_loss")
 	private String stopLoss;
 
 	//"11""TAKE PROFIT";
-	@CsvBindByPosition(position = 10)
+	@Column(name = "take_profit")
 	private String takeProfit;
 
 	//"12""DEPOZYT ZABEZPIECZAJĄCY (PLN)";
-	@CsvBindByPosition(position = 11)
+	@Column(name = "security_deposit_pln")
 	private String securityDepositPln;
 
 	//"13""KURS WYMIANY";
-	@CsvBindByPosition(position = 12)
+	@Column(name = "exchange_rate")
 	private String exchangeRate;
 
 	//"14""WARTOŚĆ POZYCJI (PLN)";
-	@CsvBindByPosition(position = 13)
+	@Column(name = "order_value_pln")
 	private String orderValuePln;
 
 	//"15""ZAKSIĘGOWANA KWOTA (PLN)";
-	@CsvBindByPosition(position = 14)
+	@Column(name = "posted_value_pln")
 	private String postedValuePln;
 
 	//"16""SALDO (PLN)";
-	@CsvBindByPosition(position = 15)
+	@Column(name = "balance_pln")
 	private String balancePln;
 
 	//"17""WARTOŚĆ WYŁĄCZAJĄC OPŁATĘ";
-	@CsvBindByPosition(position = 16)
+	@Column(name = "value_without_commission")
 	private String valueWithoutCommission;
 
 	//"18""OPŁATA";
-	@CsvBindByPosition(position = 17)
+	@Column(name = "commission")
 	private String commission;
 
 	//"19""KOSZTY UTRZYMANIA POZYCJI - WARTOŚĆ POZYCJI";
-	@CsvBindByPosition(position = 18)
+	@Column(name = "maintenance_charge_value")
 	private String maintenanceChargeValue;
 
 	//"20""STAWKA ZA UTRZYMANIE POZYCJI";
-	@CsvBindByPosition(position = 19)
+	@Column(name = "daily_maintenance_charge_rate")
 	private String dailyMaintenanceChargeRate;
 
 	//"21""KOSZTY UTRZYMANIA POZYCJI (PLN)";
-	@CsvBindByPosition(position = 20)
+	@Column(name = "maintenance_charge_pln")
 	private String maintenanceChargePln;
 
 	//"22""KOSZTY UTRZYMANIA POZYCJI - SUMA (PLN)";
-	@CsvBindByPosition(position = 21)
+	@Column(name = "maintenance_charge_sum_pln")
 	private String maintenanceChargeSumPln;
 
 	//"23""OPŁATA";
-	@CsvBindByPosition(position = 22)
+	@Column(name = "charge2")
 	private String charge2;
 
 	//"24""ZWROT %";
-	@CsvBindByPosition(position = 23)
+	@Column(name = "revenue_in_percents")
 	private String revenueInPercents;
 
 	//"25""KIERUNEK";
-	@CsvBindByPosition(position = 24)
+	@Column(name = "direction")
 	private String direction;
 
 	//"26""WYPŁATA GDY ZYSK";
-	@CsvBindByPosition(position = 25)
+	@Column(name = "profit_payoff")
 	private String profitPayoff;
 
 	//"27""WYPŁATA GDY BEZ ZMIANY";
-	@CsvBindByPosition(position = 26)
+	@Column(name = "neutral_payoff")
 	private String neutralPayoff;
 
 	//"28""OTWARCIE";
-	@CsvBindByPosition(position = 27)
+	@Column(name = "opening")
 	private String opening;
 
 	//"29""WYGAŚNIĘCIE";
-	@CsvBindByPosition(position = 28)
+	@Column(name = "expiration")
 	private String expiration;
 
 	//"30""ROZLICZENIE";
-	@CsvBindByPosition(position = 29)
+	@Column(name = "clearance1")
 	private String clearance1;
 
 	//"31""CENA ROZLICZENIA";
-	@CsvBindByPosition(position = 30)
+	@Column(name = "clearance1_price")
 	private String clearance1Price;
 
 	//"32""WYNIK";
-	@CsvBindByPosition(position = 31)
+	@Column(name = "outcome")
 	private String outcome;
 
 	//"33""WYPŁATA";
-	@CsvBindByPosition(position = 32)
+	@Column(name = "payoff")
 	private String payoff;
 
 	//"34""TYP";
-	@CsvBindByPosition(position = 33)
+	@Column(name = "type")
 	private String type;
 
 	//"35""WYGAŚNIĘCIE";
-	@CsvBindByPosition(position = 34)
+	@Column(name = "expiration2")
 	private String expiration2;
 
 	//"36""CENA WYKONAWCZA";
-	@CsvBindByPosition(position = 35)
+	@Column(name = "execution_price")
 	private String executionPrice;
 
 	//"37""ROZLICZENIE";
-	@CsvBindByPosition(position = 36)
+	@Column(name = "clearance2")
 	private String clearance2;
 
 	//"38""CENA ROZLICZENIA";
-	@CsvBindByPosition(position = 37)
+	@Column(name = "clearance2_price")
 	private String clearance2Price;
 
 	//"39""ZYSK";
-	@CsvBindByPosition(position = 38)
+	@Column(name = "profit")
 	private String profit;
 
 	//"40""STRATA"
-	@CsvBindByPosition(position = 39)
+	@Column(name = "loss")
 	private String loss;
-
 }

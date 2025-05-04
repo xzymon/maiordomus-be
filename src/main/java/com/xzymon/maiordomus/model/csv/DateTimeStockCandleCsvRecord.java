@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 
 @Data
-@Builder
+//@Builder
 public class DateTimeStockCandleCsvRecord {
 	//Date
 	@CsvBindByPosition(position = 0)

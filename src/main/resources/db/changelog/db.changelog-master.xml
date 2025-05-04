@@ -7,5 +7,6 @@
 	<include file="fileUpload/fileUpload.xml" relativeToChangelogFile="true"/>
 	<include file="stock/stock.xml" relativeToChangelogFile="true"/>
 	<include file="dummy/dummy.xml" relativeToChangelogFile="true"/>
+	<include file="cmcHistory/cmcHistory.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

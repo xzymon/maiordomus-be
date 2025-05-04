@@ -54,4 +54,10 @@
 			<column name="close" type="java.math.BigDecimal"/>
 		</createTable>
 	</changeSet>
+
+	<changeSet id="stock-5" author="xzymon">
+		<addColumn tableName="stock_valor">
+			<column name="cmc_name" type="varchar(255)"/>
+		</addColumn>
+	</changeSet>
 </databaseChangeLog>
