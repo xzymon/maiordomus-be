@@ -65,7 +65,7 @@ public class DailyStockService {
 	public StooqDailyStockCandle getByValorAndDayAndTime(StockValor stockValor, Date day, Time time) {
 		if (stockValor != null) {
 			String timeString = MapperHelper.timeToTimeString(time);
-			Integer candleNo = QuarterDayTimeMapper.PERIOD_END_TIME_TO_NUMBER.get(timeString);
+			Integer candleNo = QuarterDayTimeMapper.getInstance().getPeriodEndTimeToNumberMap().get(timeString);
 			return dailyStockCandleRepository.findByValorAndDayAndCandleNo(stockValor, day, candleNo);
 		}
 		return null;

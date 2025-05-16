@@ -13,7 +13,7 @@ import java.sql.Date;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "stock_candle_stq1d",
-		uniqueConstraints = @UniqueConstraint(columnNames = {"valor_id", "day", "candle_no"})
+		uniqueConstraints = @UniqueConstraint(columnNames = {"valor_id", "candle_day", "candle_no"})
 )
 @Data
 @NoArgsConstructor

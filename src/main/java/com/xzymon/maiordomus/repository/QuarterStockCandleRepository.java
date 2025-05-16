@@ -14,7 +14,5 @@ public interface QuarterStockCandleRepository extends JpaRepository<StooqQuarter
 
 	List<StooqQuarterStockCandle> findByValor(StockValor valor);
 
-	List<StooqQuarterStockCandle> findByValorAndDay(StockValor valor, Date day);
-
-	StooqQuarterStockCandle findByValorAndDayAndCandleNo(StockValor valor, Date day, Integer candleNo);
+	List<StooqQuarterStockCandle> findByValorAndDayOrderByCandleNoAsc(StockValor valor, Date day);
 }

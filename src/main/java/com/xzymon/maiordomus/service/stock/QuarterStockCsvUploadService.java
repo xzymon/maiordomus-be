@@ -28,7 +28,7 @@ public class QuarterStockCsvUploadService extends AbstractStockCsvUploadService 
 	public QuarterStockCsvUploadService(StockValorService stockValorService, QuarterStockCandleRepository quarterStockCandleRepository) {
 		super(stockValorService);
 		this.quarterStockCandleRepository = quarterStockCandleRepository;
-		this.quarterDayTimeMapper = new QuarterDayTimeMapper();
+		this.quarterDayTimeMapper = QuarterDayTimeMapper.getInstance();
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class QuarterStockCsvUploadService extends AbstractStockCsvUploadService 
 			sb.append("[").append(rowIndex).append("]");
 			sb.append("{Invalid date=").append(record.getDate()).append("}");
 		}
-		if (quarterDayTimeMapper.PERIOD_END_TIME_TO_NUMBER.get(record.getTime()) == null) {
+		if (quarterDayTimeMapper.getPeriodEndTimeToNumberMap().get(record.getTime()) == null) {
 			sb.append("[").append(rowIndex).append("]");
 			sb.append("{Invalid time=").append(record.getTime()).append("}");
 		}

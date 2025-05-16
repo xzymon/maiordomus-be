@@ -18,6 +18,7 @@ public abstract class StockCandle {
 	@JoinColumn(name = "valor_id")
 	private StockValor valor;
 
+	@Column(name = "candle_day")
 	private Date day;
 
 	@Column(name = "candle_no")

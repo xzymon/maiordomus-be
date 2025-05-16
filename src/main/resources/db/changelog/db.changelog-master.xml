@@ -9,4 +9,5 @@
 	<include file="dummy/dummy.xml" relativeToChangelogFile="true"/>
 	<include file="cmcHistory/cmcHistory.xml" relativeToChangelogFile="true"/>
 
+	<include file="structure/structure.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

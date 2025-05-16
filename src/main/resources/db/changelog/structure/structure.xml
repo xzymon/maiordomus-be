@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.12.xsd">
+
+	<changeSet id="structure-1" author="xzymon">
+		<createTable tableName="note">
+			<column name="id" type="UUID">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="title" type="VARCHAR(255)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="category" type="VARCHAR(255)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="content" type="VARCHAR(10000)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="created_at" type="TIMESTAMP">
+				<constraints nullable="false"/>
+			</column>
+			<column name="updated_at" type="TIMESTAMP">
+				<constraints nullable="false"/>
+			</column>
+			<column name="time_reference" type="TIMESTAMP">
+				<constraints nullable="true"/>
+			</column>
+			<column name="source" type="VARCHAR(255)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="additional_info" type="VARCHAR(1000)">
+				<constraints nullable="true"/>
+			</column>
+		</createTable>
+		<createTable tableName="note_tags">
+			<column name="note_id" type="UUID">
+				<constraints nullable="false"/>
+			</column>
+			<column name="tag_name" type="VARCHAR(100)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+		<addPrimaryKey columnNames="note_id, tag_name" tableName="note_tags" constraintName="pk_note_tags"/>
+		<addForeignKeyConstraint baseTableName="note_tags" baseColumnNames="note_id"
+								 referencedTableName="note" referencedColumnNames="id"
+								 constraintName="fk_note_tags_notes"/>
+	</changeSet>
+
+</databaseChangeLog>

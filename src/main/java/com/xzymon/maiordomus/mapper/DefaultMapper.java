@@ -13,18 +13,19 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 @Mapper
 public interface DefaultMapper {
 	DefaultMapper INSTANCE = Mappers.getMapper(DefaultMapper.class);
-	QuarterDayTimeMapper QUARTER_DAY_TIME_MAPPER = new QuarterDayTimeMapper();
-	DailyDayTimeMapper DAILY_DAY_TIME_MAPPER = new DailyDayTimeMapper();
 
 	@Mapping(target = "id", source = "id")
 	@Mapping(target = "message", source = "message")
 	DummyMessageDto toDummyMessageDto(DummyMessage message);
 
 	@Mapping(target = "day", expression = "java(com.xzymon.maiordomus.utils.MapperHelper.dateToDayString(stockCandle.getDay()))")
-	@Mapping(target = "periodEnd", expression = "java(com.xzymon.maiordomus.mapper.daytime.DailyDayTimeMapper.NUMBER_TO_PERIOD_END_TIME.get(stockCandle.getCandleNo().toString()))")
+	@Mapping(target = "periodStart", expression = "java(com.xzymon.maiordomus.mapper.daytime.DailyDayTimeMapper.getInstance().getNumberToPeriodStartTimeMap().get(stockCandle.getCandleNo().toString()))")
+	@Mapping(target = "periodEnd", expression = "java(com.xzymon.maiordomus.mapper.daytime.DailyDayTimeMapper.getInstance().getNumberToPeriodEndTimeMap().get(stockCandle.getCandleNo().toString()))")
 	@Mapping(target = "candleNo", source = "candleNo")
 	@Mapping(target = "open", source = "open")
 	@Mapping(target = "close", source = "close")
@@ -33,7 +34,8 @@ public interface DefaultMapper {
 	StockCandleDto toStockCandleDto(StooqDailyStockCandle stockCandle);
 
 	@Mapping(target = "day", expression = "java(com.xzymon.maiordomus.utils.MapperHelper.dateToDayString(stockCandle.getDay()))")
-	@Mapping(target = "periodEnd", expression = "java(com.xzymon.maiordomus.mapper.daytime.QuarterDayTimeMapper.NUMBER_TO_PERIOD_END_TIME.get(stockCandle.getCandleNo().toString()))")
+	@Mapping(target = "periodStart", expression = "java(com.xzymon.maiordomus.mapper.daytime.QuarterDayTimeMapper.getInstance().getNumberToPeriodStartTimeMap().get(stockCandle.getCandleNo()))")
+	@Mapping(target = "periodEnd", expression = "java(com.xzymon.maiordomus.mapper.daytime.QuarterDayTimeMapper.getInstance().getNumberToPeriodEndTimeMap().get(stockCandle.getCandleNo()))")
 	@Mapping(target = "candleNo", source = "candleNo")
 	@Mapping(target = "open", source = "open")
 	@Mapping(target = "close", source = "close")
@@ -46,8 +48,9 @@ public interface DefaultMapper {
 	DummyMessage toDummyMessage(DummyMessageDto message);
 
 	@Mapping(target = "id", ignore = true)
+	@Mapping(target = "valor", ignore = true)
 	@Mapping(target = "day", expression = "java(com.xzymon.maiordomus.utils.MapperHelper.dayStringToDate(stockCandleDto.getDay()))")
-	@Mapping(target = "candleNo", expression = "java(DAILY_DAY_TIME_MAPPER.PERIOD_END_TIME_TO_NUMBER.get(stockCandleDto.getPeriodEnd()))")
+	@Mapping(target = "candleNo", expression = "java(com.xzymon.maiordomus.mapper.daytime.DailyDayTimeMapper.getInstance().getPeriodEndTimeToNumberMap().get(stockCandleDto.getPeriodEnd()))")
 	@Mapping(target = "open", source = "open")
 	@Mapping(target = "close", source = "close")
 	@Mapping(target = "high", source = "high")
@@ -55,8 +58,9 @@ public interface DefaultMapper {
 	StooqDailyStockCandle toDailyStockCandle(StockCandleDto stockCandleDto);
 
 	@Mapping(target = "id", ignore = true)
+	@Mapping(target = "valor", ignore = true)
 	@Mapping(target = "day", expression = "java(com.xzymon.maiordomus.utils.MapperHelper.dayStringToDate(stockCandleDto.getDay()))")
-	@Mapping(target = "candleNo", expression = "java(QUARTER_DAY_TIME_MAPPER.PERIOD_END_TIME_TO_NUMBER.get(stockCandleDto.getPeriodEnd()))")
+	@Mapping(target = "candleNo", expression = "java(com.xzymon.maiordomus.mapper.daytime.QuarterDayTimeMapper.getInstance().getPeriodEndTimeToNumberMap().get(stockCandleDto.getPeriodEnd()))")
 	@Mapping(target = "open", source = "open")
 	@Mapping(target = "close", source = "close")
 	@Mapping(target = "high", source = "high")
@@ -150,4 +154,7 @@ public interface DefaultMapper {
 		//@Mapping(target = "loss", source = "loss")
 	CmcHistory toCmcHistory(CmcHistoryDto dto);
 
+	// Kolekcje
+	List<StockCandleDto> dailyListToStockCandleDtoList(List<StooqDailyStockCandle> stockCandleList);
+	List<StockCandleDto> quarterListToStockCandleDtoList(List<StooqQuarterStockCandle> stockCandleList);
 }

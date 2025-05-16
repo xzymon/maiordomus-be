@@ -6,6 +6,7 @@ import com.xzymon.maiordomus.dto.CmcHistoryDto;
 import com.xzymon.maiordomus.dto.ProtoHistoryDto;
 import com.xzymon.maiordomus.mapper.CsvMapper;
 import com.xzymon.maiordomus.mapper.DefaultMapper;
+import com.xzymon.maiordomus.mapper.helper.CmcInstrumentHelper;
 import com.xzymon.maiordomus.model.csv.CmcHistoryCsvRecord;
 import com.xzymon.maiordomus.model.db.CmcHistory;
 import com.xzymon.maiordomus.model.db.FileUploadStatus;
@@ -160,6 +161,8 @@ public class CmcHistoryCsvUploadService implements CsvUploadService {
 	public void createStockValorMap() {
 		List<StockValor> valors = stockValorRepository.findAll();
 		stockNameToEntityMap = valors.stream()
-			.collect(Collectors.toMap(StockValor::getCmcName, valor -> valor));
+			.collect(Collectors.toMap(valor -> CmcInstrumentHelper.VALOR_NAME_TO_INSTRUMENT_MAP.get(valor.getName()), valor -> valor));
 	}
+
+	//CmcInstrumentHelper.VALOR_NAME_TO_INSTRUMENT_MAP::get
 }

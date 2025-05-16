@@ -5,6 +5,7 @@ import com.xzymon.maiordomus.dto.request.DayInQuarterCandlesRequest;
 import com.xzymon.maiordomus.dto.response.DayInQuarterCandlesResponse;
 import com.xzymon.maiordomus.mapper.DefaultMapper;
 import com.xzymon.maiordomus.model.db.StockCandle;
+import com.xzymon.maiordomus.model.db.StockValor;
 import com.xzymon.maiordomus.model.db.StooqQuarterStockCandle;
 import com.xzymon.maiordomus.service.stock.QuarterStockService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -16,8 +17,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.sql.Date;
 import java.util.List;
 
 @Controller
@@ -45,11 +48,9 @@ public class QuarterStockController {
 
 	@CrossOrigin(origins = "*")
 	@GetMapping("/day4symbol")
-	public ResponseEntity<DayInQuarterCandlesResponse> getDayForValor(DayInQuarterCandlesRequest request) {
+	public ResponseEntity<DayInQuarterCandlesResponse> getDayForValor(@ModelAttribute DayInQuarterCandlesRequest request) {
 		LOGGER.info("Performing getDayForValor with {}", request);
-		//List<StockCandle> fromDB = quarterStockService.getDayForValor(vn, day);
-		//List<StockCandleDTO> dtos = fromDB.stream().map(DefaultMapper.INSTANCE::toStockCandleDto).toList();
-		DayInQuarterCandlesResponse response = new DayInQuarterCandlesResponse();
+		DayInQuarterCandlesResponse response = quarterStockService.getByValorAndDay(request);
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 }

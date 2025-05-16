@@ -1,7 +1,7 @@
 package com.xzymon.maiordomus.dto.response;
 
 import com.xzymon.maiordomus.dto.BetDto;
-import com.xzymon.maiordomus.dto.NotesDto;
+import com.xzymon.maiordomus.dto.NoteDto;
 import com.xzymon.maiordomus.dto.StockCandleDto;
 import com.xzymon.maiordomus.dto.StockEventsDto;
 import lombok.Data;
@@ -18,6 +18,6 @@ public class DayInQuarterCandlesResponse {
 	private BigDecimal previousDayClose;
 	private List<StockCandleDto> quarterCandles;
 	private List<StockEventsDto> events;
-	private List<NotesDto> notes;
+	private List<NoteDto> notes;
 	private List<BetDto> bets;
 }

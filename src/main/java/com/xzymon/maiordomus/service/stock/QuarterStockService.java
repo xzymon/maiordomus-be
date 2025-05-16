@@ -1,17 +1,23 @@
 package com.xzymon.maiordomus.service.stock;
 
+import com.xzymon.maiordomus.dto.StockCandleDto;
+import com.xzymon.maiordomus.dto.request.DayInQuarterCandlesRequest;
+import com.xzymon.maiordomus.dto.response.DayInQuarterCandlesResponse;
+import com.xzymon.maiordomus.mapper.DefaultMapper;
 import com.xzymon.maiordomus.mapper.daytime.QuarterDayTimeMapper;
 import com.xzymon.maiordomus.model.db.StooqQuarterStockCandle;
 import com.xzymon.maiordomus.model.db.StockValor;
 import com.xzymon.maiordomus.repository.QuarterStockCandleRepository;
 import com.xzymon.maiordomus.repository.StockValorRepository;
 import com.xzymon.maiordomus.utils.MapperHelper;
+import com.xzymon.maiordomus.utils.PreviousDayHelper;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -147,21 +153,53 @@ public class QuarterStockService {
 		return quarterStockCandleRepository.findAll().stream().collect(Collectors.toList());
 	}
 
-	public List<StooqQuarterStockCandle> getAllByValorAndDay(StockValor stockValor, Date day) {
-		//Date dateDay = MapperHelper.dayStringToDate(day);
+	public DayInQuarterCandlesResponse getByValorAndDay(DayInQuarterCandlesRequest request) {
+		DayInQuarterCandlesResponse response = new DayInQuarterCandlesResponse();
+		response.setValorName(request.getSymbol());
+		response.setYyyymmdd(request.getDashSeparatedYYYYMMDD());
+		Date day = MapperHelper.dayStringToDate(request.getDashSeparatedYYYYMMDD());
+		String previousDayString = PreviousDayHelper.getByValorNameAndDayString(request.getSymbol(), request.getDashSeparatedYYYYMMDD());
+		Date previousDay = MapperHelper.dayStringToDate(previousDayString);
+		response.setDayOfWeek(getDayOfWeek(day));
+		StockValor stockValor = stockValorRepository.findByName(request.getSymbol());
 		if (stockValor != null) {
-			List<StooqQuarterStockCandle> stockCandles = quarterStockCandleRepository.findByValorAndDay(stockValor, day);
-			return stockCandles.stream().collect(Collectors.toList());
+			List<StooqQuarterStockCandle> stockCandles = quarterStockCandleRepository.findByValorAndDayOrderByCandleNoAsc(stockValor, day);
+			List<StockCandleDto> candleDtos = DefaultMapper.INSTANCE.quarterListToStockCandleDtoList(stockCandles);
+			response.setQuarterCandles(candleDtos);
+
+			StockCandleDto openCandle = candleDtos.get(0);
+			StockCandleDto closeCandle = candleDtos.get(candleDtos.size()-1);
+
+			StockCandleDto lowCandle = candleDtos.stream().min(Comparator.comparing(StockCandleDto::getLow)).get();
+			StockCandleDto highCandle = candleDtos.stream().max(Comparator.comparing(StockCandleDto::getHigh)).get();
+
+			StockCandleDto dailyCandle = new StockCandleDto();
+			dailyCandle.setOpen(openCandle.getOpen());
+			dailyCandle.setClose(closeCandle.getClose());
+			dailyCandle.setLow(lowCandle.getLow());
+			dailyCandle.setHigh(highCandle.getHigh());
+			dailyCandle.setDay(closeCandle.getDay());
+			response.setDailyCandle(dailyCandle);
+
+			List<StooqQuarterStockCandle> previousDayStockCandles = quarterStockCandleRepository.findByValorAndDayOrderByCandleNoAsc(stockValor, previousDay);
+			if (!previousDayStockCandles.isEmpty()) {
+				StockCandleDto previousDayLastCandleDto = DefaultMapper.INSTANCE.toStockCandleDto(previousDayStockCandles.get(previousDayStockCandles.size() - 1));
+				response.setPreviousDayClose(previousDayLastCandleDto.getClose());
+			}
 		}
-		return List.of();
+		return response;
 	}
 
 	public StooqQuarterStockCandle getByValorAndDayAndTime(StockValor stockValor, Date day, Time time) {
 		if (stockValor != null) {
 			String timeString = MapperHelper.timeToTimeString(time);
-			Integer candleNo = QuarterDayTimeMapper.PERIOD_END_TIME_TO_NUMBER.get(timeString);
-			return quarterStockCandleRepository.findByValorAndDayAndCandleNo(stockValor, day, candleNo);
+			Integer candleNo = QuarterDayTimeMapper.getInstance().getPeriodEndTimeToNumberMap().get(timeString);
+			//return quarterStockCandleRepository.findByValorAndDayAndCandleNo(stockValor, day, candleNo);
 		}
 		return null;
+	}
+
+	private String getDayOfWeek(Date date) {
+		return date.toLocalDate().getDayOfWeek().toString();
 	}
 }
