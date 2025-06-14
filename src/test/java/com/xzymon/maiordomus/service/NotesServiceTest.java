@@ -1,11 +1,14 @@
 package com.xzymon.maiordomus.service;
 
+import com.xzymon.maiordomus.dto.NoteDto;
 import com.xzymon.maiordomus.model.db.Note;
+import com.xzymon.maiordomus.model.db.NoteCategory;
 import com.xzymon.maiordomus.repository.NoteRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -26,6 +29,7 @@ class NotesServiceTest {
 		Note note = new Note();
 		note.setTitle("Test Note");
 		note.setContent("This is a test note.");
+		note.setCategory(NoteCategory.CFD_TRADES);
 		note.setTimeReference(LocalDateTime.now());
 		note.setTags(List.of("test"));
 
@@ -37,31 +41,33 @@ class NotesServiceTest {
 		assertEquals("Test Note", savedNote.getTitle());
 	}
 
-	/*
 	@Test
 	void getAllByTagAndDate() {
 		// Przygotowanie danych testowych
-		Note note1 = new Note();
-		note1.setTitle("Note 1");
-		note1.setContent("Content 1");
-		note1.setDate(LocalDate.now());
-		note1.setTag("work");
+		NoteDto septemberLastDayNoteDto = new NoteDto();
+		septemberLastDayNoteDto.setTitle("First day Note");
+		septemberLastDayNoteDto.setContent("This is a test note.");
+		septemberLastDayNoteDto.setCategory(NoteCategory.CFD_TRADES);
+		septemberLastDayNoteDto.setTimeReference(LocalDateTime.of(2024, 9, 30, 12, 0, 0));
+		septemberLastDayNoteDto.setTags(List.of("aaa"));
 
-		Note note2 = new Note();
-		note2.setTitle("Note 2");
-		note2.setContent("Content 2");
-		note2.setDate(LocalDate.now());
-		note2.setTag("work");
+		NoteDto octoberFirstDayNoteDto = new NoteDto();
+		octoberFirstDayNoteDto.setTitle("October Note");
+		octoberFirstDayNoteDto.setContent("Content 2");
+		octoberFirstDayNoteDto.setCategory(NoteCategory.CFD_TRADES);
+		octoberFirstDayNoteDto.setTimeReference(LocalDateTime.of(2024, 10, 1, 13, 0, 0));
+		octoberFirstDayNoteDto.setTags(List.of("aaa"));
 
-		noteRepository.save(note1);
-		noteRepository.save(note2);
+		notesService.createNote(septemberLastDayNoteDto);
+		notesService.createNote(octoberFirstDayNoteDto);
 
 		// Pobranie notatek na podstawie tagu i daty
-		List<Note> notes = notesService.getAllByTagAndDate("work", LocalDate.now());
+		LocalDate lastSeptember = LocalDate.of(2024, 9, 30);
+		List<NoteDto> aaaLastSeptember = notesService.getAllByTagAndDate("aaa", lastSeptember);
 
 		// Weryfikacja
-		assertEquals(2, notes.size());
-		assertTrue(notes.stream().anyMatch(note -> note.getTitle().equals("Note 1")));
-		assertTrue(notes.stream().anyMatch(note -> note.getTitle().equals("Note 2")));
-	}*/
+		assertEquals(1, aaaLastSeptember.size());
+		//assertTrue(notes.stream().anyMatch(note -> note.getTitle().equals("Note 1")));
+		//assertTrue(notes.stream().anyMatch(note -> note.getTitle().equals("Note 2")));
+	}
 }

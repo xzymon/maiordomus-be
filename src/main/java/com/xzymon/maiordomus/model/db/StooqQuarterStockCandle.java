@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.time.LocalDate;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -16,7 +16,7 @@ import java.sql.Date;
 public class StooqQuarterStockCandle extends StockCandle {
 
 	public StooqQuarterStockCandle(StockValor valor,
-	                               Date day,
+	                               LocalDate day,
 	                               Integer candleNo,
 	                               BigDecimal open,
 	                               BigDecimal high,
@@ -32,7 +32,7 @@ public class StooqQuarterStockCandle extends StockCandle {
 	}
 
 	public StooqQuarterStockCandle(StockValor valor,
-	                               Date day,
+	                               LocalDate day,
 	                               String candleNoString,
 	                               String openString,
 	                               String highString,

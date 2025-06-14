@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.time.LocalDate;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -20,7 +20,7 @@ import java.sql.Date;
 public class StooqDailyStockCandle extends StockCandle {
 
 	public StooqDailyStockCandle(StockValor valor,
-	                             Date day,
+	                             LocalDate day,
 	                             Integer candleNo,
 	                             BigDecimal open,
 	                             BigDecimal high,
@@ -36,7 +36,7 @@ public class StooqDailyStockCandle extends StockCandle {
 	}
 
 	public StooqDailyStockCandle(StockValor valor,
-	                             Date day,
+	                             LocalDate day,
 	                             String candleNoString,
 	                             String openString,
 	                             String highString,

@@ -4,6 +4,7 @@ import com.opencsv.bean.CsvToBeanBuilder;
 import com.xzymon.maiordomus.dto.StockCandleDto;
 import com.xzymon.maiordomus.mapper.CsvMapper;
 import com.xzymon.maiordomus.mapper.DefaultMapper;
+import com.xzymon.maiordomus.mapper.StockMapper;
 import com.xzymon.maiordomus.mapper.daytime.QuarterDayTimeMapper;
 import com.xzymon.maiordomus.model.csv.DateTimeStockCandleCsvRecord;
 import com.xzymon.maiordomus.model.db.StockValor;
@@ -105,7 +106,7 @@ public class QuarterStockCsvUploadService extends AbstractStockCsvUploadService 
 	public boolean storeCandlesForValor(List<StockCandleDto> dtos, StockValor stockValor) {
 		log.debug("Storing {} candles", dtos.size());
 		dtos.stream().forEach(dto -> {
-			StooqQuarterStockCandle candle = DefaultMapper.INSTANCE.toQuarterStockCandle(dto);
+			StooqQuarterStockCandle candle = StockMapper.INSTANCE.toQuarterStockCandle(dto);
 			candle.setValor(stockValor);
 			StooqQuarterStockCandle savedCandle = quarterStockCandleRepository.save(candle);
 			log.debug("Saved candle {}", savedCandle);

@@ -4,9 +4,11 @@ import com.xzymon.maiordomus.dto.NoteDto;
 import com.xzymon.maiordomus.mapper.StructureMapper;
 import com.xzymon.maiordomus.model.db.Note;
 import com.xzymon.maiordomus.repository.NoteRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -24,8 +26,11 @@ public class NotesService {
 		return structureMapper.toNoteDto(savedNote);
 	}
 
+	@Transactional
 	public List<NoteDto> getAllByTagAndDate(String tag, LocalDate date) {
-		List<Note> result = noteRepository.findAllByTagsContainingAndTimeReferenceBetween(tag, date, date);
+		LocalDateTime dateStartOfDay = date.atStartOfDay();
+		LocalDateTime dateEndOfDay = date.atTime(23, 59, 59);
+		List<Note> result = noteRepository.findByTagAndDayOfTimeReference(tag, dateStartOfDay, dateEndOfDay);
 		return structureMapper.noteListToDtoList(result);
 	}
 }

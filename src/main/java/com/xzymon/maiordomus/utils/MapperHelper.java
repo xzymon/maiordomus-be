@@ -36,6 +36,21 @@ public class MapperHelper {
 		return Date.valueOf(LocalDate.of(year, month, day));
 	}
 
+	public static String localDateToDayString(LocalDate localDate) {
+		int day = localDate.getDayOfMonth();
+		int month = localDate.getMonthValue();
+		int year = localDate.getYear();
+		return getDateString(year, month, day);
+	}
+
+	public static LocalDate dayStringToLocalDate(String dayString) {
+		String[] parts = dayString.split("-");
+		int year = Integer.parseInt(parts[0]);
+		int month = Integer.parseInt(parts[1]);
+		int day = Integer.parseInt(parts[2]);
+		return LocalDate.of(year, month, day);
+	}
+
 	public static String getTimeString(int hour, int minute, int second) {
 		return String.format(TIME_FORMAT, hour, minute, second);
 	}

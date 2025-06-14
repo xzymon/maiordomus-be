@@ -38,10 +38,8 @@ public class Note {
 	@Column(name = "time_reference", columnDefinition = "TIMESTAMP")
 	private LocalDateTime timeReference;
 
-	@ElementCollection
-	@CollectionTable(name = "note_tags", joinColumns = @JoinColumn(name = "note_id"))
-	@Column(name = "tag", nullable = false)
-	private List<String> tags;
+	@Column(name = "tags")
+	private String tags;
 
 	@Column(length = 255)
 	private String source;

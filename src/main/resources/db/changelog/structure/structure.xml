@@ -28,25 +28,19 @@
 			<column name="time_reference" type="TIMESTAMP">
 				<constraints nullable="true"/>
 			</column>
+			<column name="tags" type="VARCHAR(512)">
+				<constraints nullable="true"/>
+			</column>
 			<column name="source" type="VARCHAR(255)">
 				<constraints nullable="true"/>
 			</column>
 			<column name="additional_info" type="VARCHAR(1000)">
 				<constraints nullable="true"/>
 			</column>
-		</createTable>
-		<createTable tableName="note_tags">
-			<column name="note_id" type="UUID">
-				<constraints nullable="false"/>
-			</column>
-			<column name="tag_name" type="VARCHAR(100)">
-				<constraints nullable="false"/>
+			<column name="author_name" type="VARCHAR(255)">
+				<constraints nullable="true"/>
 			</column>
 		</createTable>
-		<addPrimaryKey columnNames="note_id, tag_name" tableName="note_tags" constraintName="pk_note_tags"/>
-		<addForeignKeyConstraint baseTableName="note_tags" baseColumnNames="note_id"
-								 referencedTableName="note" referencedColumnNames="id"
-								 constraintName="fk_note_tags_notes"/>
 	</changeSet>
 
 </databaseChangeLog>

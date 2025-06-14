@@ -27,24 +27,6 @@ public class DailyStockService {
 		this.stockValorRepository = stockValorRepository;
 	}
 
-	public void initRepo() {
-		List<StockValor> stockValors = new ArrayList<>();
-		StockValor usdgbp = new StockValor();
-		usdgbp.setName("USDGBP");
-		stockValors.add(usdgbp);
-		stockValorRepository.saveAll(stockValors);
-
-		List<StooqDailyStockCandle> dsCandles = new ArrayList<>();
-		dsCandles.add(new StooqDailyStockCandle(usdgbp, Date.valueOf(LocalDate.of(1900,3,01)),"0","0.2047","0.2047","0.2047","0.2047"));
-		dsCandles.add(new StooqDailyStockCandle(usdgbp, Date.valueOf(LocalDate.of(1900,6,01)),"0","0.2047","0.2047","0.2043","0.2043"));
-		dsCandles.add(new StooqDailyStockCandle(usdgbp, Date.valueOf(LocalDate.of(1900,9,01)),"0","0.2043","0.2062","0.2043","0.2062"));
-		dsCandles.add(new StooqDailyStockCandle(usdgbp, Date.valueOf(LocalDate.of(1900,12,01)),"0","0.2062","0.2062","0.2058","0.2058"));
-		dsCandles.add(new StooqDailyStockCandle(usdgbp, Date.valueOf(LocalDate.of(1901,3,01)),"0","0.2058","0.2058","0.2056","0.2056"));
-		dsCandles.add(new StooqDailyStockCandle(usdgbp, Date.valueOf(LocalDate.of(1901,6,01)),"0","0.2056","0.2058","0.2056","0.2058"));
-		dsCandles.add(new StooqDailyStockCandle(usdgbp, Date.valueOf(LocalDate.of(1901,9,01)),"0","0.2058","0.2058","0.2043","0.2043"));
-		dailyStockCandleRepository.saveAll(dsCandles);
-	}
-
 	public StockValor getValorByName(String name) {
 		return stockValorRepository.findByName(name);
 	}

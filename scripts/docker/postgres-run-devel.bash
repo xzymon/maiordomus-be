@@ -1,4 +1,5 @@
 docker run --name maiordomus-postgres-devel \
+--rm \
 -d \
 -p 5432:5432 \
 -e POSTGRES_PASSWORD=maiordomus-be \
