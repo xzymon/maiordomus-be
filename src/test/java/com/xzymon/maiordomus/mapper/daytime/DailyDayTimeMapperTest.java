@@ -1,23 +1,17 @@
 package com.xzymon.maiordomus.mapper.daytime;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DailyDayTimeMapperTest {
 
-	DailyDayTimeMapper mapper;
-
-	@BeforeEach
-	void setUp() {
-		mapper = new DailyDayTimeMapper();
-	}
+	DailyDayTimeMapper mapper = DailyDayTimeMapper.getInstance();
 
 	@Test
 	void zero() {
-		assertEquals("24:00:00", DailyDayTimeMapper.NUMBER_TO_PERIOD_END_TIME.get(0));
-		assertEquals("00:00:01", DailyDayTimeMapper.NUMBER_TO_PERIOD_START_TIME.get(0));
+		assertEquals("24:00:00", mapper.getNumberToPeriodEndTimeMap().get(0));
+		assertEquals("00:00:01", mapper.getNumberToPeriodStartTimeMap().get(0));
 	}
 
 	@Test

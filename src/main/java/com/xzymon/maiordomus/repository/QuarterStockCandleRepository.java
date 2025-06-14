@@ -5,6 +5,7 @@ import com.xzymon.maiordomus.model.db.StooqQuarterStockCandle;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface QuarterStockCandleRepository extends JpaRepository<StooqQuarterStockCandle, Long> {
@@ -14,7 +15,5 @@ public interface QuarterStockCandleRepository extends JpaRepository<StooqQuarter
 
 	List<StooqQuarterStockCandle> findByValor(StockValor valor);
 
-	List<StooqQuarterStockCandle> findByValorAndDay(StockValor valor, Date day);
-
-	StooqQuarterStockCandle findByValorAndDayAndCandleNo(StockValor valor, Date day, Integer candleNo);
+	List<StooqQuarterStockCandle> findByValorAndDayOrderByCandleNoAsc(StockValor valor, LocalDate day);
 }

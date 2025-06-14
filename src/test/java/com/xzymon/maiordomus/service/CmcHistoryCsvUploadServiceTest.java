@@ -1,14 +1,18 @@
 package com.xzymon.maiordomus.service;
 
+import com.xzymon.maiordomus.mapper.daytime.HalfMinuteDayTimeMapper;
 import com.xzymon.maiordomus.model.csv.CmcHistoryCsvRecord;
+import com.xzymon.maiordomus.repository.CmcHistoryRepository;
+import com.xzymon.maiordomus.repository.ProtoHistoryRepository;
+import com.xzymon.maiordomus.repository.StockValorRepository;
 import com.xzymon.maiordomus.service.cmc.CmcHistoryCsvUploadService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.ResourceUtils;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -18,14 +22,25 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 class CmcHistoryCsvUploadServiceTest {
 
-	CmcHistoryCsvUploadService service = new CmcHistoryCsvUploadService();
+	@Autowired
+	CmcHistoryRepository cmcHistoryRepository;
+
+	@Autowired
+	ProtoHistoryRepository protoHistoryRepository;
+
+	@Autowired
+	StockValorRepository stockValorRepository;
+
+	@Autowired
+	CmcHistoryCsvUploadService service;
 
 	@Test
 	void extract() throws FileNotFoundException {
 		File file = ResourceUtils.getFile("classpath:csvdata/cmc-history.csv");
 		FileInputStream fis = new FileInputStream(file);
+		BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
 
-		List<CmcHistoryCsvRecord> records = service.extract(fis);
+		List<CmcHistoryCsvRecord> records = service.extract(reader);
 
 		System.out.println(records.size());
 

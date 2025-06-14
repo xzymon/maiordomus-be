@@ -1,8 +1,5 @@
 package com.xzymon.maiordomus.lifecycle;
 
-import com.xzymon.maiordomus.service.DummyService;
-import com.xzymon.maiordomus.service.stock.DailyStockService;
-import com.xzymon.maiordomus.service.stock.QuarterStockService;
 import org.springframework.boot.context.event.*;
 import org.springframework.context.event.*;
 import org.springframework.stereotype.Component;
@@ -12,21 +9,13 @@ import org.springframework.web.context.support.ServletRequestHandledEvent;
 @Component
 public class ApplicationEventsListener {
 
-	private final DummyService dummyService;
-	private final DailyStockService dailyStockService;
-	private final QuarterStockService quarterStockService;
-
-	public ApplicationEventsListener(DummyService dummyService, QuarterStockService quarterStockService, DailyStockService dailyStockService) {
-		this.dummyService = dummyService;
-		this.quarterStockService = quarterStockService;
-		this.dailyStockService = dailyStockService;
+	public ApplicationEventsListener() {
 	}
 
 	// at start 1)
 	@EventListener
 	public void handleContextRefreshed(ContextRefreshedEvent event) {
 		System.out.println("ContextRefreshedEvent: Kontekst aplikacji został odświeżony.");
-		//injectEntitiesToDatabase();
 		System.out.println("Teraz repo powinno być zainicjalizowane");
 	}
 
@@ -91,11 +80,5 @@ public class ApplicationEventsListener {
 	@EventListener
 	public void handleServletRequestHandled(ServletRequestHandledEvent event) {
 		System.out.println("ServletRequestHandledEvent: Żądanie Servlet zostało obsłużone.");
-	}
-
-	private void injectEntitiesToDatabase() {
-		dummyService.initRepo();
-		quarterStockService.initRepo();
-		dailyStockService.initRepo();
 	}
 }

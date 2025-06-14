@@ -3,7 +3,7 @@ package com.xzymon.maiordomus.service.stock;
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.xzymon.maiordomus.dto.StockCandleDto;
 import com.xzymon.maiordomus.mapper.CsvMapper;
-import com.xzymon.maiordomus.mapper.DefaultMapper;
+import com.xzymon.maiordomus.mapper.StockMapper;
 import com.xzymon.maiordomus.model.csv.DateStockCandleCsvRecord;
 import com.xzymon.maiordomus.model.csv.DateVolumeStockCandleCsvRecord;
 import com.xzymon.maiordomus.model.db.StockValor;
@@ -151,7 +151,7 @@ public class DailyStockCsvUploadService extends AbstractStockCsvUploadService {
 		int rowIndex = FIRST_ROW_WITH_DATA_ONE_BASED;
 		log.debug("Storing {} candles", dtos.size());
 		for (StockCandleDto dto : dtos) {
-			candle = DefaultMapper.INSTANCE.toDailyStockCandle(dto);
+			candle = StockMapper.INSTANCE.toDailyStockCandle(dto);
 			candle.setValor(stockValor);
 			savedCandle = dailyStockCandleRepository.save(candle);
 			log.debug("Saved candle {}", savedCandle);

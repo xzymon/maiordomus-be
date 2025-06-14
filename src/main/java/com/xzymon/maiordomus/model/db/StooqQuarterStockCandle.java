@@ -4,19 +4,19 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.time.LocalDate;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "stock_candle_stq15m",
-	   uniqueConstraints = @UniqueConstraint(columnNames = {"valor_id", "day", "candle_no"})
+	   uniqueConstraints = @UniqueConstraint(columnNames = {"valor_id", "candle_day", "candle_no"})
 )
 @Data
 @NoArgsConstructor
 public class StooqQuarterStockCandle extends StockCandle {
 
 	public StooqQuarterStockCandle(StockValor valor,
-	                               Date day,
+	                               LocalDate day,
 	                               Integer candleNo,
 	                               BigDecimal open,
 	                               BigDecimal high,
@@ -32,7 +32,7 @@ public class StooqQuarterStockCandle extends StockCandle {
 	}
 
 	public StooqQuarterStockCandle(StockValor valor,
-	                               Date day,
+	                               LocalDate day,
 	                               String candleNoString,
 	                               String openString,
 	                               String highString,

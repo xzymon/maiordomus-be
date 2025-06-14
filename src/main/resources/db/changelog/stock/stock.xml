@@ -27,9 +27,9 @@
 				<constraints nullable="false" primaryKey="true" primaryKeyName="pk_stock_candle_stq15m" validateNullable="true"/>
 			</column>
 			<column name="valor_id" type="BIGINT">
-				<constraints foreignKeyName="FK_STOCK_CANDLE_ON_VALOR" references="stock_valor(id)"/>
+				<constraints foreignKeyName="FK_STOCK_CANDLE_Q_ON_VALOR" references="stock_valor(id)"/>
 			</column>
-			<column name="day" type="date"/>
+			<column name="candle_day" type="date"/>
 			<column name="candle_no" type="int"/>
 			<column name="open" type="java.math.BigDecimal"/>
 			<column name="high" type="java.math.BigDecimal"/>
@@ -44,9 +44,9 @@
 				<constraints nullable="false" primaryKey="true" primaryKeyName="pk_stock_candle_stq1d" validateNullable="true"/>
 			</column>
 			<column name="valor_id" type="BIGINT">
-				<constraints foreignKeyName="FK_STOCK_CANDLE_ON_VALOR" references="stock_valor(id)"/>
+				<constraints foreignKeyName="FK_STOCK_CANDLE_D_ON_VALOR" references="stock_valor(id)"/>
 			</column>
-			<column name="day" type="date"/>
+			<column name="candle_day" type="date"/>
 			<column name="candle_no" type="int"/>
 			<column name="open" type="java.math.BigDecimal"/>
 			<column name="high" type="java.math.BigDecimal"/>

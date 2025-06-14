@@ -8,19 +8,19 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.time.LocalDate;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "stock_candle_stq1d",
-		uniqueConstraints = @UniqueConstraint(columnNames = {"valor_id", "day", "candle_no"})
+		uniqueConstraints = @UniqueConstraint(columnNames = {"valor_id", "candle_day", "candle_no"})
 )
 @Data
 @NoArgsConstructor
 public class StooqDailyStockCandle extends StockCandle {
 
 	public StooqDailyStockCandle(StockValor valor,
-	                             Date day,
+	                             LocalDate day,
 	                             Integer candleNo,
 	                             BigDecimal open,
 	                             BigDecimal high,
@@ -36,7 +36,7 @@ public class StooqDailyStockCandle extends StockCandle {
 	}
 
 	public StooqDailyStockCandle(StockValor valor,
-	                             Date day,
+	                             LocalDate day,
 	                             String candleNoString,
 	                             String openString,
 	                             String highString,

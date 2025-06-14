@@ -16,7 +16,7 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface CsvMapper {
 	CsvMapper INSTANCE = Mappers.getMapper(CsvMapper.class);
-	DailyDayTimeMapper DAILY_DAY_TIME_MAPPER = new DailyDayTimeMapper();
+	DailyDayTimeMapper DAILY_DAY_TIME_MAPPER = DailyDayTimeMapper.getInstance();
 
 	@Mapping(target = "day", source = "date")
 	@Mapping(target = "periodEnd", source = "time")

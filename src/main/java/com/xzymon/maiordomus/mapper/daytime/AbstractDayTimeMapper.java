@@ -14,21 +14,29 @@ public abstract class AbstractDayTimeMapper {
 
 	protected abstract int getIntervalSeconds();
 
+	protected abstract Map<Integer, String> getNumberToPeriodEndTimeMap();
+	protected abstract void setNumberToPeriodEndTimeMap(Map<Integer, String> numberToPeriodEndTimeMap);
+
+	protected abstract Map<String, Integer> getPeriodEndTimeToNumberMap();
+	protected abstract void setPeriodEndTimeToNumberMap(Map<String, Integer> periodEndTimeToNumberMap);
+
+	protected abstract Map<Integer, String> getNumberToPeriodStartTimeMap();
+	protected abstract void setNumberToPeriodStartTimeMap(Map<Integer, String> numberToPeriodStartTimeMap);
+
+	protected abstract Map<String, Integer> getPeriodStartTimeToNumberMap();
+	protected abstract void setPeriodStartTimeToNumberMap(Map<String, Integer> periodStartTimeToNumberMap);
+
+	protected abstract Period[] getPeriods();
+	protected abstract void setPeriods(Period[] periods);
+
 	protected void periodEndTimeToNumberExtenstion() {
 	}
 
 	protected int getPeriodsInDayCount() {
-		return PERIODS.length;
+		return getPeriods().length;
 	}
 
 	public static final int PERIOD_END_START_OFFSET_IN_SECONDS = 1;
-
-	public Period[] PERIODS;
-
-	public static final Map<Integer, String> NUMBER_TO_PERIOD_END_TIME = new HashMap<>();
-	public static final Map<String, Integer> PERIOD_END_TIME_TO_NUMBER = new HashMap<>();
-	public static final Map<Integer, String> NUMBER_TO_PERIOD_START_TIME = new HashMap<>();
-	public static final Map<String, Integer> PERIOD_START_TIME_TO_NUMBER = new HashMap<>();
 
 	protected AbstractDayTimeMapper() {
 		int intervalHours = getIntervalHours();
@@ -36,7 +44,7 @@ public abstract class AbstractDayTimeMapper {
 		int intervalSeconds = getIntervalSeconds();
 
 		int intervalsCount = MapperHelper.DAY_IN_SECONDS / (((intervalHours * MapperHelper.HOUR_IN_MINUTES) + intervalMinutes) * MapperHelper.MINUTE_IN_SECONDS + intervalSeconds);
-		PERIODS = new Period[intervalsCount];
+		Period[] periods = new Period[intervalsCount];
 		
 		int cHours = 0;
 		int cMinutes = 0;
@@ -61,15 +69,24 @@ public abstract class AbstractDayTimeMapper {
 				cHours -= MapperHelper.DAY_IN_HOURS;
 			}
 			cPeriod.setEndTime(MapperHelper.getTimeString(cHours, cMinutes, cSeconds));
-			PERIODS[i] = cPeriod;
+			periods[i] = cPeriod;
 		}
+		Map<Integer, String> numberToPeriodStartTimeMap = new HashMap<>();
+		Map<Integer, String> numberToPeriodEndTimeMap = new HashMap<>();
+		Map<String, Integer> periodStartTimeToNumberMap = new HashMap<>();
+		Map<String, Integer> periodEndTimeToNumberMap = new HashMap<>();
 
-		for (int i = 0; i < PERIODS.length; i++) {
-			NUMBER_TO_PERIOD_START_TIME.put(i, PERIODS[i].getStartTime());
-			PERIOD_START_TIME_TO_NUMBER.put(PERIODS[i].getStartTime(), i);
-			NUMBER_TO_PERIOD_END_TIME.put(i, PERIODS[i].getEndTime());
-			PERIOD_END_TIME_TO_NUMBER.put(PERIODS[i].getEndTime(), i);
+		for (int i = 0; i < periods.length; i++) {
+			numberToPeriodStartTimeMap.put(i, periods[i].getStartTime());
+			periodStartTimeToNumberMap.put(periods[i].getStartTime(), i);
+			numberToPeriodEndTimeMap.put(i, periods[i].getEndTime());
+			periodEndTimeToNumberMap.put(periods[i].getEndTime(), i);
 		}
+		setPeriods(periods);
+		setNumberToPeriodStartTimeMap(numberToPeriodStartTimeMap);
+		setNumberToPeriodEndTimeMap(numberToPeriodEndTimeMap);
+		setPeriodStartTimeToNumberMap(periodStartTimeToNumberMap);
+		setPeriodEndTimeToNumberMap(periodEndTimeToNumberMap);
 		periodEndTimeToNumberExtenstion();
 	}
 }

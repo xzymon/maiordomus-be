@@ -17,7 +17,7 @@ import java.io.FileNotFoundException;
 @Controller
 @RequestMapping(ForceCmcHistoryCSVUploadController.BASE_URL)
 public class ForceCmcHistoryCSVUploadController {
-	public static final String BASE_URL = "/api/v1/forcecmc";
+	public static final String BASE_URL = "/v1/forcecmc";
 	private static final Logger LOGGER = LoggerFactory.getLogger(ForceCmcHistoryCSVUploadController.class);
 
 	private final FileFinderService fileFinderService;

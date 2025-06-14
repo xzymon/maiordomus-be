@@ -1,19 +1,43 @@
 package com.xzymon.maiordomus.mapper.daytime;
 
+import com.xzymon.maiordomus.mapper.Period;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.Map;
+
 public class HalfMinuteDayTimeMapper extends AbstractDayTimeMapper {
+	private static final HalfMinuteDayTimeMapper INSTANCE = new HalfMinuteDayTimeMapper();
 
-	@Override
-	protected int getIntervalHours() {
-		return 0;
+	@Getter
+	@Setter
+	private Period[] periods;
+
+	@Getter
+	@Setter
+	private Map<Integer, String> numberToPeriodEndTimeMap;
+	@Getter
+	@Setter
+	private Map<String, Integer> periodEndTimeToNumberMap;
+	@Getter
+	@Setter
+	private Map<Integer, String> numberToPeriodStartTimeMap;
+	@Getter
+	@Setter
+	private Map<String, Integer> periodStartTimeToNumberMap;
+
+	@Getter
+	private final int intervalHours = 0;
+	@Getter
+	private final int intervalMinutes = 0;
+	@Getter
+	private final int intervalSeconds = 30;
+
+	private HalfMinuteDayTimeMapper() {
+		super();
 	}
 
-	@Override
-	protected int getIntervalMinutes() {
-		return 0;
-	}
-
-	@Override
-	protected int getIntervalSeconds() {
-		return 30;
+	public static HalfMinuteDayTimeMapper getInstance() {
+		return INSTANCE;
 	}
 }

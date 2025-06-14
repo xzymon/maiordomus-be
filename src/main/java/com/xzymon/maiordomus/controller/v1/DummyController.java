@@ -16,7 +16,7 @@ import java.util.List;
 @Controller
 @RequestMapping(DummyController.BASE_URL)
 public class DummyController {
-	public static final String BASE_URL = "/api/v1/dummy";
+	public static final String BASE_URL = "/v1/dummy";
 	private static final Logger LOGGER = LoggerFactory.getLogger(DummyController.class);
 
 	private final DummyService dummyService;

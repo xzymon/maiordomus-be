@@ -3,8 +3,8 @@ package com.xzymon.maiordomus.model.db;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.sql.Date;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Data
 @MappedSuperclass
@@ -18,7 +18,8 @@ public abstract class StockCandle {
 	@JoinColumn(name = "valor_id")
 	private StockValor valor;
 
-	private Date day;
+	@Column(name = "candle_day")
+	private LocalDate day;
 
 	@Column(name = "candle_no")
 	private Integer candleNo;

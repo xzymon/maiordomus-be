@@ -30,7 +30,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-jersey'
 	//implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${openapi_doc_version}"
+	//implementation 'io.springfox:springfox-boot-starter:3.0.0'
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
+	//implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${openapi_doc_version}"
 	implementation "com.opencsv:opencsv:${opencsv_version}"
 	//implementation 'org.springframework.session:spring-session-core'
 	//implementation 'org.springframework.session:spring-session-jdbc'
@@ -49,7 +51,7 @@ dependencies {
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	//testImplementation 'org.springframework.security:spring-security-test'
-	//testImplementation 'com.h2database:h2'
+	testImplementation 'com.h2database:h2'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
@@ -63,4 +65,9 @@ compileJava {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+bootWar {
+	archiveBaseName.set('my-artifact-name')
+	//version.set('0.0.1')
 }

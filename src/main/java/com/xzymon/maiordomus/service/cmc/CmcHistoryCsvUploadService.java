@@ -1,11 +1,12 @@
 package com.xzymon.maiordomus.service.cmc;
 
 import com.opencsv.bean.CsvToBeanBuilder;
-import com.opencsv.enums.CSVReaderNullFieldIndicator;
 import com.xzymon.maiordomus.dto.CmcHistoryDto;
 import com.xzymon.maiordomus.dto.ProtoHistoryDto;
 import com.xzymon.maiordomus.mapper.CsvMapper;
 import com.xzymon.maiordomus.mapper.DefaultMapper;
+import com.xzymon.maiordomus.mapper.helper.CmcInstrumentDetails;
+import com.xzymon.maiordomus.mapper.helper.CmcInstrumentHelper;
 import com.xzymon.maiordomus.model.csv.CmcHistoryCsvRecord;
 import com.xzymon.maiordomus.model.db.CmcHistory;
 import com.xzymon.maiordomus.model.db.FileUploadStatus;
@@ -25,6 +26,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -159,7 +161,15 @@ public class CmcHistoryCsvUploadService implements CsvUploadService {
 
 	public void createStockValorMap() {
 		List<StockValor> valors = stockValorRepository.findAll();
+		log.info("Found {} valors", valors.size());
+		Map<String, CmcInstrumentDetails> map = CmcInstrumentHelper.VALOR_NAME_TO_INSTRUMENT_MAP;
 		stockNameToEntityMap = valors.stream()
-			.collect(Collectors.toMap(StockValor::getCmcName, valor -> valor));
+			.collect(Collectors.toMap(
+					valor -> {
+						// ten kawałek kodu potencjalnie powoduje problemy po załadowaniu nowych danych,
+						// gdy załadowano valor nie mający odpowiednika w CmcInstrumentHelper.VALOR_NAME_TO_INSTRUMENT_MAP
+						// FIX to po prostu dodanie odpowiedniego wpisu w tej mapie - log pomaga namierzyć czego brakuje
+						log.info("Collecting {}", valor);
+						return map.get(valor.getName()).getInstrumentName();}, valor -> valor));
 	}
 }
