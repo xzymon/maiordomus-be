@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DOCKER_IMAGE_SRC_BASE_NAME=maiordomus-cntnr-data-prod
-IMAGE_VERSION=v3
+IMAGE_VERSION=v4
 DOCKER_IMAGE_SRC="${DOCKER_IMAGE_SRC_BASE_NAME}:${IMAGE_VERSION}"
 NEW_CNTNR=maiordomus-postgres-test
 

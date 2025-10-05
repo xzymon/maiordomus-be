@@ -3,15 +3,14 @@ package com.xzymon.maiordomus.controller.v1;
 import com.xzymon.maiordomus.dto.StockCandleDto;
 import com.xzymon.maiordomus.dto.request.DayInQuarterCandlesRequest;
 import com.xzymon.maiordomus.dto.response.DayInQuarterCandlesResponse;
-import com.xzymon.maiordomus.mapper.StockMapper;
 import com.xzymon.maiordomus.service.stock.QuarterStockService;
+import com.xzymon.maiordomus.service.stock.QuarterStockServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -52,7 +52,8 @@ public class QuarterStockController {
 	public ResponseEntity<List<StockCandleDto>> getAll() {
 		LOGGER.info("Performing getAll");
 		var fromDB = quarterStockService.getAll();
-		List<StockCandleDto> dtos = fromDB.stream().map(StockMapper.INSTANCE::toStockCandleDto).toList();
+		//List<StockCandleDto> dtos = fromDB.stream().map(StockMapper.INSTANCE::toStockCandleDto).toList();
+		List<StockCandleDto> dtos = new ArrayList<StockCandleDto>();
 		return new ResponseEntity<>(dtos, HttpStatus.OK);
 	}
 

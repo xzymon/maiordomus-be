@@ -5,6 +5,7 @@ public enum CmcOrderType {
 	LIQUIDATION("Likwidacja"),
 	TAKE_PROFIT_MODIFIED("Zmodyfikowano Take Profit"),
 	REMIT("Wpłata"),
+	OUTPAYMENT("Wypłata"),
 	CLOSE("Zamknięcie Transakcji"),
 	BUY("Transakcja Kupna"),
 	SELL_MODIFIED("Zmodyfikowano Transakcję Sprzedaży"),
@@ -15,7 +16,14 @@ public enum CmcOrderType {
 	BUY_MODIFIED("Zmodyfikowano Transakcję Kupna"),
 	STOP_LOSS_MODIFIED("Zmodyfikowano Stop Loss"),
 	TAKE_PROFIT("Take Profit"),
-	DEACTIVATION("Zablokowano");
+	DEACTIVATION("Zablokowano"),
+	LIMIT_BUY("Zlecenie Limit Kupna"),
+	LIMIT_SELL("Zlecenie Limit Sprzedaży"),
+	LIMIT_BUY_EXECUTION("Transakcja Zlecenia Limit Kupna"),
+	LIMIT_SELL_EXECUTION("Transakcja Zlecenia Limit Sprzedaży"),
+	LIMIT_BUY_MODIFICATION("Zmodyfikowano Zlecenie Limit Kupna"),
+	LIMIT_SELL_MODIFICATION("Zmodyfikowano Zlecenie Limit Sprzedaży"),
+	CANCEL("Anulowano Zlecenie");
 
 	private String name;
 

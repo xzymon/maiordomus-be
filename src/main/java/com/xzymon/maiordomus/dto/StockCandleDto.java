@@ -1,5 +1,6 @@
 package com.xzymon.maiordomus.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.math.BigDecimal;
