@@ -3,6 +3,20 @@
 # Ten skrypt służy do zapisania w pliku tar.gz woluminu z danymi dla bazy postgres
 # Ma na celu zachowanie danych "dużej bazy" w celu odtworzenia kontenera z bazą - z woluminem załadowanym danymi
 
+# dla stq1d
+# ostatnie zapisane dane   curr - są na datę: 2025-10-03
+# ostatnie zapisane dane crypto - są na datę: 2025-10-04
+#
+# dla stq15m
+# ostatnie zapisane dane   curr - są na datę: 2025-10-03
+# ostatnie zapisane dane crypto - są na datę: 2025-10-04
+#
+# ostatnie zapisane dane    cmc - są na datę: 2025-10-03
+#
+# ilość wierszy w stock_candle_stq1d : 716148
+# ilość wierszy w stock_candle_stq15m : 2754836
+# ilość wierszy w cmc_history : 11684
+
 CNTNR_WITH_VOLUME_SRC="maiordomus-postgres-prod"
 NEW_ARCHIVE_FILE_WITH_VOLUME_DATA="maiordomus-prod-volume.tar.gz"
 DOCKER_IMAGES_LOCAL_STORAGE_DIR=${DOCKER_IMAGES_USER_STORAGE_DIR}

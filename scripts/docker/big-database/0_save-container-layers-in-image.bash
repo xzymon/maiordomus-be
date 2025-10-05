@@ -1,9 +1,14 @@
 #!/bin/bash
 
+## Ten skrypt dotyczy sytuacji gdy w kontenerze zmieniło się coś poza samymi danymi w bazie
+## Z dużym prawdopodobieństwem jego zastosowanie dotyczy jedynie sytuacji gdy:
+## 1. zmieniono zmienne w kontenerze lub
+## 2. zmieniono (zaktualizowano) wersję obrazu bazowego (czyli PostgreSQLa)
+
 DOCKER_CNTNR_SRC=maiordomus-postgres-prod
 DOCKER_IMAGE_TARGET_BASE_NAME=maiordomus-cntnr-data-prod
-LAST_KNOWN_VERSION=v2
-NEW_VERSION=v3
+LAST_KNOWN_VERSION=v3
+NEW_VERSION=v4
 DOCKER_IMAGE_TARGET="${DOCKER_IMAGE_TARGET_BASE_NAME}:${NEW_VERSION}"
 DOCKER_IMAGE_STORAGE_FILE="${DOCKER_IMAGE_TARGET_BASE_NAME}_${NEW_VERSION}.tar"
 DOCKER_IMAGES_LOCAL_STORAGE_DIR=${DOCKER_IMAGES_USER_STORAGE_DIR}

@@ -5,10 +5,10 @@ IN_DIR=$MAIOR_DRIVER_FILES_DIR
 
 SUBSCRIPT_FILE_NAME=cp_csv_files_in_for_valor.bash
 
-#DATES_FILE_NAME=maior_in_dates_crypto
-DATES_FILE_NAME=maior_in_dates_curr
-#VALORS_FILE_NAME=valors_crypto
-VALORS_FILE_NAME=valors_curr
+DATES_FILE_NAME=maior_in_dates_crypto
+#DATES_FILE_NAME=maior_in_dates_curr
+VALORS_FILE_NAME=valors_crypto
+#VALORS_FILE_NAME=valors_curr
 
 SUBSCRIPT_FILE=$THIS_FILE_DIR/$SUBSCRIPT_FILE_NAME
 
