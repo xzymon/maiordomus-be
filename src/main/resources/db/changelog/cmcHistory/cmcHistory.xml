@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+				   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+	<changeSet id="cmcHistory-0" author="xzymon">
+		<createSequence incrementBy="50" sequenceName="cmc_history_seq" startValue="1"/>
+	</changeSet>
+
+	<changeSet id="cmcHistory-1" author="xzymon">
+		<createTable tableName="proto_history">
+			<column name="id" type="BIGINT">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+
+			<column name="order_timestamp" type="VARCHAR(255)"/>
+			<column name="order_type" type="VARCHAR(255)"/>
+			<column name="order_no" type="VARCHAR(255)"/>
+			<column name="transaction" type="VARCHAR(255)"/>
+			<column name="related_order" type="VARCHAR(255)"/>
+			<column name="instrument" type="VARCHAR(255)"/>
+			<column name="volume" type="VARCHAR(255)"/>
+			<column name="price" type="VARCHAR(255)"/>
+			<column name="price_tolerance" type="VARCHAR(255)"/>
+			<column name="stop_loss" type="VARCHAR(255)"/>
+
+			<column name="take_profit" type="VARCHAR(255)"/>
+			<column name="security_deposit_pln" type="VARCHAR(255)"/>
+			<column name="exchange_rate" type="VARCHAR(255)"/>
+			<column name="order_value_pln" type="VARCHAR(255)"/>
+			<column name="posted_value_pln" type="VARCHAR(255)"/>
+			<column name="balance_pln" type="VARCHAR(255)"/>
+			<column name="value_without_commission" type="VARCHAR(255)"/>
+			<column name="commission" type="VARCHAR(255)"/>
+			<column name="maintenance_charge_value" type="VARCHAR(255)"/>
+			<column name="daily_maintenance_charge_rate" type="VARCHAR(255)"/>
+
+			<column name="maintenance_charge_pln" type="VARCHAR(255)"/>
+			<column name="maintenance_charge_sum_pln" type="VARCHAR(255)"/>
+			<column name="charge2" type="VARCHAR(255)"/>
+			<column name="revenue_in_percents" type="VARCHAR(255)"/>
+			<column name="direction" type="VARCHAR(255)"/>
+			<column name="profit_payoff" type="VARCHAR(255)"/>
+			<column name="neutral_payoff" type="VARCHAR(255)"/>
+			<column name="opening" type="VARCHAR(255)"/>
+			<column name="expiration" type="VARCHAR(255)"/>
+			<column name="clearance1" type="VARCHAR(255)"/>
+
+			<column name="clearance1_price" type="VARCHAR(255)"/>
+			<column name="outcome" type="VARCHAR(255)"/>
+			<column name="payoff" type="VARCHAR(255)"/>
+			<column name="type" type="VARCHAR(255)"/>
+			<column name="expiration2" type="VARCHAR(255)"/>
+			<column name="execution_price" type="VARCHAR(255)"/>
+			<column name="clearance2" type="VARCHAR(255)"/>
+			<column name="clearance2_price" type="VARCHAR(255)"/>
+			<column name="profit" type="VARCHAR(255)"/>
+			<column name="loss" type="VARCHAR(255)"/>
+
+		</createTable>
+	</changeSet>
+
+	<changeSet id="cmcHistory-2" author="xzymon">
+		<createTable tableName="cmc_history">
+			<column name="id" type="BIGINT">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+
+			<column name="order_timestamp" type="timestamp"/>
+			<column name="order_type" type="VARCHAR(255)"/>
+			<column name="order_no" type="VARCHAR(255)"/>
+			<column name="transaction" type="VARCHAR(255)"/>
+			<column name="related_order" type="VARCHAR(255)"/>
+			<column name="valor_id" type="BIGINT">
+				<constraints foreignKeyName="FK_CMC_HISTORY_ON_VALOR" references="stock_valor(id)"/>
+			</column>
+			<column name="volume" type="java.math.BigDecimal"/>
+			<column name="price" type="java.math.BigDecimal"/>
+			<column name="price_tolerance" type="java.math.BigDecimal"/>
+			<column name="stop_loss" type="java.math.BigDecimal"/>
+
+			<column name="take_profit" type="java.math.BigDecimal"/>
+			<column name="security_deposit_pln" type="java.math.BigDecimal"/>
+			<column name="exchange_rate" type="java.math.BigDecimal"/>
+			<column name="order_value_pln" type="java.math.BigDecimal"/>
+			<column name="posted_value_pln" type="java.math.BigDecimal"/>
+			<column name="balance_pln" type="java.math.BigDecimal"/>
+			<column name="value_without_commission" type="java.math.BigDecimal"/>
+			<column name="commission" type="java.math.BigDecimal"/>
+			<column name="maintenance_charge_value" type="java.math.BigDecimal"/>
+			<column name="daily_maintenance_charge_rate" type="java.math.BigDecimal"/>
+
+			<column name="maintenance_charge_pln" type="java.math.BigDecimal"/>
+			<column name="maintenance_charge_sum_pln" type="java.math.BigDecimal"/>
+			<column name="charge2" type="java.math.BigDecimal"/>
+			<column name="revenue_in_percents" type="java.math.BigDecimal"/>
+			<!--
+			<column name="direction" type="VARCHAR(255)"/>
+			<column name="profit_payoff" type="VARCHAR(255)"/>
+			<column name="neutral_payoff" type="VARCHAR(255)"/>
+			<column name="opening" type="VARCHAR(255)"/>
+			<column name="expiration" type="VARCHAR(255)"/>
+			<column name="clearance1" type="VARCHAR(255)"/>
+			<column name="clearance1_price" type="VARCHAR(255)"/>
+			<column name="outcome" type="VARCHAR(255)"/>
+			<column name="payoff" type="VARCHAR(255)"/>
+			<column name="type" type="VARCHAR(255)"/>
+			<column name="expiration2" type="VARCHAR(255)"/>
+			<column name="execution_price" type="VARCHAR(255)"/>
+			<column name="clearance2" type="VARCHAR(255)"/>
+			<column name="clearance2_price" type="VARCHAR(255)"/>
+			<column name="profit" type="VARCHAR(255)"/>
+			<column name="loss" type="VARCHAR(255)"/>
+			-->
+		</createTable>
+	</changeSet>
+</databaseChangeLog>
